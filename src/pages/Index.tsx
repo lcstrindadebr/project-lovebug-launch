@@ -82,6 +82,8 @@ const Index = () => {
           <div className="flex justify-center gap-6 mt-4">
             <Link to="/termos-de-uso" className="hover:text-foreground transition-colors">Termos de Uso</Link>
             <Link to="/politica-de-privacidade" className="hover:text-foreground transition-colors">Privacidade</Link>
+            <Link to="/admin/credentials" className="hover:text-foreground transition-colors">Admin</Link>
+
           </div>
         </div>
       </footer>
