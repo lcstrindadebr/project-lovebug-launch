@@ -962,6 +962,8 @@ export type Database = {
           bivvo_config_synced_bivvo: Json | null
           bivvo_config_synced_bivvo_at: string | null
           bivvo_config_updated_at: string | null
+          bivvo_status: string | null
+          bivvo_status_checked_at: string | null
           bivvo_tenant_id: string | null
           cep: string | null
           cidade: string | null
@@ -998,6 +1000,8 @@ export type Database = {
           bivvo_config_synced_bivvo?: Json | null
           bivvo_config_synced_bivvo_at?: string | null
           bivvo_config_updated_at?: string | null
+          bivvo_status?: string | null
+          bivvo_status_checked_at?: string | null
           bivvo_tenant_id?: string | null
           cep?: string | null
           cidade?: string | null
@@ -1034,6 +1038,8 @@ export type Database = {
           bivvo_config_synced_bivvo?: Json | null
           bivvo_config_synced_bivvo_at?: string | null
           bivvo_config_updated_at?: string | null
+          bivvo_status?: string | null
+          bivvo_status_checked_at?: string | null
           bivvo_tenant_id?: string | null
           cep?: string | null
           cidade?: string | null
