@@ -1559,7 +1559,10 @@ serve(async (req) => {
       status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Erro interno';
+    const message = error instanceof Error
+      ? error.message
+      : ((error as any)?.message || (error as any)?.details || JSON.stringify(error) || 'Erro interno');
+    console.error('[admin-api] erro:', message, error);
     const status = /autenticado|negado/i.test(message) ? 403 : 500;
     return new Response(JSON.stringify({ error: message }), {
       status, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
