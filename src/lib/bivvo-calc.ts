@@ -45,10 +45,15 @@ export async function loadPlansFromDB() {
         logo: c.icon_url || ''
       }));
     }
-  } catch (e) {
+} catch (e) {
     console.error('Failed to load data from DB:', e);
   }
 }
+
+export const EXTRA_USER_PRICE = 35;
+export const TELEFONIA_PRICE = 100;
+export const DISPARO_PRICE = 197;
+
 
 export type PlanSlug = keyof typeof PLANS;
 
