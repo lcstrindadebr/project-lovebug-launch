@@ -1738,12 +1738,12 @@ const Admin = () => {
                               <div className="pt-2">
                                 <p className="text-[10px] uppercase text-muted-foreground mb-1">Canais Contratados</p>
                                 <div className="grid grid-cols-2 gap-1">
-                                  {CANAIS_DEF.map(c => {
+                                  {channels.map(c => {
                                     const qty = Number((contractedConfig.channels || {})[c.id] || 0);
                                     if (!qty) return null;
                                     return (
                                       <div key={c.id} className="flex justify-between px-2 py-1 rounded bg-background/60 border text-[11px]">
-                                        <span>{c.emoji} {c.label}</span>
+                                        <span>{c.icon_url ? <img src={c.icon_url} className="w-3 h-3 inline-block mr-1" /> : c.emoji} {c.label}</span>
                                         <strong>{qty}</strong>
                                       </div>
                                     );
@@ -1797,9 +1797,9 @@ const Admin = () => {
                             <div className="pt-1">
                               <p className="text-[10px] uppercase text-muted-foreground mb-1">Canais Contratados</p>
                               <div className="grid grid-cols-2 gap-1.5">
-                                {CANAIS_DEF.map(c => (
+                                {channels.map(c => (
                                   <div key={c.id} className="flex items-center justify-between gap-2 px-2 py-1 rounded bg-background/60 border text-[11px]">
-                                    <span className="truncate">{c.emoji} {c.label}</span>
+                                    <span className="truncate">{c.icon_url ? <img src={c.icon_url} className="w-3 h-3 inline-block mr-1" /> : c.emoji} {c.label}</span>
                                     <Input type="number" min={0} className="h-6 w-14 text-xs"
                                       value={configForm.channels[c.id] || 0}
                                       onChange={(e) => setConfigForm(f => ({ ...f, channels: { ...f.channels, [c.id]: Number(e.target.value) || 0 } }))}
@@ -2108,12 +2108,12 @@ const Admin = () => {
                             <p className="text-[10px] text-muted-foreground uppercase">Canais Contratados</p>
                             <div className="flex flex-wrap gap-2">
                               {Object.entries(internalSub.channels_config || {}).map(([key, val]: [string, any]) => {
-                                const channel = CANAIS_DEF.find(c => c.id === key);
+                                const channel = channels.find(c => c.slug === key);
                                 if (!val || val === 0) return null;
                                 return (
                                   <Badge key={key} variant="secondary" className="text-[10px] py-0.5 px-2 flex items-center gap-1">
-                                    {channel?.logo ? (
-                                      <img src={channel.logo} alt={channel.label} className="w-3 h-3 object-contain" />
+                                    {channel?.icon_url ? (
+                                      <img src={channel.icon_url} alt={channel.label} className="w-3 h-3 object-contain" />
                                     ) : (
                                       <span>{channel?.emoji || '•'}</span>
                                     )}
