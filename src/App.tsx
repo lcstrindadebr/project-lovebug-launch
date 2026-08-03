@@ -13,6 +13,8 @@ import AffiliateLogin from "./pages/AffiliateLogin";
 import Affiliate from "./pages/Affiliate";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
+import AdminCredentials from "./pages/AdminCredentials";
+
 
 const queryClient = new QueryClient();
 
