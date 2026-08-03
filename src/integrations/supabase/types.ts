@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_secrets: {
+        Row: {
+          created_at: string
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string
+          key?: string
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
       affiliate_clicks: {
         Row: {
           affiliate_id: string
@@ -332,6 +353,68 @@ export type Database = {
         }
         Relationships: []
       }
+      bivvo_config_change_logs: {
+        Row: {
+          action: string
+          asaas_value_after: number | null
+          asaas_value_before: number | null
+          asaas_value_changed: boolean
+          bivvo_relevant_changed: boolean
+          changed_by: string | null
+          changed_by_email: string | null
+          changed_by_name: string | null
+          changed_fields: string[] | null
+          config_after: Json | null
+          config_before: Json | null
+          created_at: string
+          id: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          asaas_value_after?: number | null
+          asaas_value_before?: number | null
+          asaas_value_changed?: boolean
+          bivvo_relevant_changed?: boolean
+          changed_by?: string | null
+          changed_by_email?: string | null
+          changed_by_name?: string | null
+          changed_fields?: string[] | null
+          config_after?: Json | null
+          config_before?: Json | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          asaas_value_after?: number | null
+          asaas_value_before?: number | null
+          asaas_value_changed?: boolean
+          bivvo_relevant_changed?: boolean
+          changed_by?: string | null
+          changed_by_email?: string | null
+          changed_by_name?: string | null
+          changed_fields?: string[] | null
+          config_after?: Json | null
+          config_before?: Json | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bivvo_config_change_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       coupons: {
         Row: {
           active: boolean | null
@@ -454,6 +537,87 @@ export type Database = {
           },
         ]
       }
+      finance_daily_snapshots: {
+        Row: {
+          active_subscriptions: number
+          affiliate_commissions_paid: number
+          chargebacks: number
+          created_at: string
+          date: string
+          expenses_total: number
+          gross_revenue: number
+          id: string
+          net_profit: number
+          net_revenue: number
+          overdue_value: number
+          refunds: number
+          updated_at: string
+        }
+        Insert: {
+          active_subscriptions?: number
+          affiliate_commissions_paid?: number
+          chargebacks?: number
+          created_at?: string
+          date: string
+          expenses_total?: number
+          gross_revenue?: number
+          id?: string
+          net_profit?: number
+          net_revenue?: number
+          overdue_value?: number
+          refunds?: number
+          updated_at?: string
+        }
+        Update: {
+          active_subscriptions?: number
+          affiliate_commissions_paid?: number
+          chargebacks?: number
+          created_at?: string
+          date?: string
+          expenses_total?: number
+          gross_revenue?: number
+          id?: string
+          net_profit?: number
+          net_revenue?: number
+          overdue_value?: number
+          refunds?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      finance_events: {
+        Row: {
+          amount: number
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json
+          net_amount: number | null
+          occurred_at: string
+          reference_id: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json
+          net_amount?: number | null
+          occurred_at?: string
+          reference_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json
+          net_amount?: number | null
+          occurred_at?: string
+          reference_id?: string | null
+        }
+        Relationships: []
+      }
       marketing_materials: {
         Row: {
           created_at: string | null
@@ -484,6 +648,39 @@ export type Database = {
           type?: string
           updated_at?: string | null
           url?: string
+        }
+        Relationships: []
+      }
+      official_templates: {
+        Row: {
+          body_text: string
+          buttons: Json | null
+          created_at: string
+          id: string
+          media_type: string | null
+          media_url: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          body_text: string
+          buttons?: Json | null
+          created_at?: string
+          id?: string
+          media_type?: string | null
+          media_url?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          body_text?: string
+          buttons?: Json | null
+          created_at?: string
+          id?: string
+          media_type?: string | null
+          media_url?: string | null
+          name?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -659,6 +856,78 @@ export type Database = {
           },
         ]
       }
+      system_logs: {
+        Row: {
+          context: Json | null
+          created_at: string
+          id: string
+          level: string
+          message: string
+          source: string
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string
+          id?: string
+          level?: string
+          message: string
+          source: string
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string
+          id?: string
+          level?: string
+          message?: string
+          source?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          assigned_to: string | null
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          priority: string
+          status: string
+          subtasks: Json
+          title: string
+          updated_at: string
+          waiting_third_party: boolean
+        }
+        Insert: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: string
+          status?: string
+          subtasks?: Json
+          title: string
+          updated_at?: string
+          waiting_third_party?: boolean
+        }
+        Update: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: string
+          status?: string
+          subtasks?: Json
+          title?: string
+          updated_at?: string
+          waiting_third_party?: boolean
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -686,8 +955,17 @@ export type Database = {
           asaas_subscription_id: string | null
           bairro: string | null
           billing_name: string | null
+          bivvo_config: Json | null
+          bivvo_config_previous: Json | null
+          bivvo_config_synced_asaas_at: string | null
+          bivvo_config_synced_asaas_value: number | null
+          bivvo_config_synced_bivvo: Json | null
+          bivvo_config_synced_bivvo_at: string | null
+          bivvo_config_updated_at: string | null
+          bivvo_tenant_id: string | null
           cep: string | null
           cidade: string | null
+          company_name: string | null
           complemento: string | null
           cpf: string | null
           created_at: string | null
@@ -696,8 +974,11 @@ export type Database = {
           endereco: string | null
           estado: string | null
           id: string
+          inactivated_at: string | null
           name: string
           numero: string | null
+          overdue_since: string | null
+          person_type: string | null
           plano_ativo: string | null
           status: string | null
           updated_at: string | null
@@ -708,8 +989,17 @@ export type Database = {
           asaas_subscription_id?: string | null
           bairro?: string | null
           billing_name?: string | null
+          bivvo_config?: Json | null
+          bivvo_config_previous?: Json | null
+          bivvo_config_synced_asaas_at?: string | null
+          bivvo_config_synced_asaas_value?: number | null
+          bivvo_config_synced_bivvo?: Json | null
+          bivvo_config_synced_bivvo_at?: string | null
+          bivvo_config_updated_at?: string | null
+          bivvo_tenant_id?: string | null
           cep?: string | null
           cidade?: string | null
+          company_name?: string | null
           complemento?: string | null
           cpf?: string | null
           created_at?: string | null
@@ -718,8 +1008,11 @@ export type Database = {
           endereco?: string | null
           estado?: string | null
           id?: string
+          inactivated_at?: string | null
           name: string
           numero?: string | null
+          overdue_since?: string | null
+          person_type?: string | null
           plano_ativo?: string | null
           status?: string | null
           updated_at?: string | null
@@ -730,8 +1023,17 @@ export type Database = {
           asaas_subscription_id?: string | null
           bairro?: string | null
           billing_name?: string | null
+          bivvo_config?: Json | null
+          bivvo_config_previous?: Json | null
+          bivvo_config_synced_asaas_at?: string | null
+          bivvo_config_synced_asaas_value?: number | null
+          bivvo_config_synced_bivvo?: Json | null
+          bivvo_config_synced_bivvo_at?: string | null
+          bivvo_config_updated_at?: string | null
+          bivvo_tenant_id?: string | null
           cep?: string | null
           cidade?: string | null
+          company_name?: string | null
           complemento?: string | null
           cpf?: string | null
           created_at?: string | null
@@ -740,8 +1042,11 @@ export type Database = {
           endereco?: string | null
           estado?: string | null
           id?: string
+          inactivated_at?: string | null
           name?: string
           numero?: string | null
+          overdue_since?: string | null
+          person_type?: string | null
           plano_ativo?: string | null
           status?: string | null
           updated_at?: string | null
