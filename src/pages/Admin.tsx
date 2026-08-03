@@ -308,10 +308,16 @@ const Admin = () => {
     if (isAdmin) {
       loadPlans();
       loadCoupons();
+      loadChannels();
       loadSubscriptions();
       loadCustomers();
     }
   }, [isAdmin]);
+
+  const loadChannels = async () => {
+    const { data } = await supabase.from('channels').select('*').order('sort_order');
+    if (data) setChannels(data);
+  };
 
   const loadCustomers = async () => {
     setLoadingCustomers(true);
