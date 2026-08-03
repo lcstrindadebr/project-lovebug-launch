@@ -1,31 +1,6 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 
 const AdminCredentials = () => {
-  const [adminUser, setAdminUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const checkAdmin = async () => {
-      try {
-        const { data: { users }, error } = await supabase.auth.admin.listUsers();
-        if (error) throw error;
-        
-        // As defined in create_admin_external.sql
-        const targetEmail = 'admin@bivvo.com.br';
-        const found = users.find(u => u.email === targetEmail);
-        setAdminUser(found);
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // checkAdmin(); // This would require service role, which we don't have client-side
-    setLoading(false);
-  }, []);
-
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-slate-900 font-sans">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
@@ -48,14 +23,14 @@ const AdminCredentials = () => {
 
           <div className="text-sm text-slate-600 space-y-2">
             <p>Estas são as credenciais definidas no arquivo <code className="bg-slate-100 px-1 rounded">create_admin_external.sql</code>.</p>
-            <p>Se o usuário ainda não foi criado, você pode executar o script SQL no editor do backend.</p>
+            <p>Certifique-se de que o backend foi provisionado com estas credenciais.</p>
           </div>
 
           <a 
-            href="/login" 
+            href="/" 
             className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
           >
-            Ir para Login
+            Voltar para Início
           </a>
         </div>
       </div>
@@ -68,3 +43,4 @@ const AdminCredentials = () => {
 };
 
 export default AdminCredentials;
+
