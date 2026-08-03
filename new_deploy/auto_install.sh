@@ -5,7 +5,7 @@
 # Este script faz a instalação e a manutenção do sistema Bivvo.
 #
 # COMO USAR:
-#   curl -fsSL https://raw.githubusercontent.com/lcstrindadebr/bivvo-pagamento/main/new_deploy/auto_install.sh -o install.sh
+#   curl -fsSL https://raw.githubusercontent.com/lcstrindadebr/project-lovebug-launch/main/new_deploy/auto_install.sh -o install.sh
 #   chmod +x install.sh
 #   sudo ./install.sh
 # =============================================================================
@@ -19,7 +19,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-REPO_URL="https://github.com/lcstrindadebr/bivvo-pagamento.git"
+REPO_URL="https://github.com/lcstrindadebr/project-lovebug-launch.git"
 APP_DIR="/opt/bivvo-pagamento"
 WEB_DIR="/var/www/bivvo"
 
