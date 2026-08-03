@@ -1364,11 +1364,21 @@ serve(async (req) => {
     if (action === 'save-bivvo-token' && req.method === 'POST') {
       const body = await req.json().catch(() => ({}));
       const value = typeof body?.value === 'string' ? body.value.trim() : '';
+      
+      // Validação básica de token (ajuste conforme o formato real se conhecido)
+      if (value.length > 0 && value.length < 10) {
+        throw new Error('Token muito curto ou inválido.');
+      }
+
       const { error } = await supabase
         .from('admin_secrets')
-        .upsert({ key: 'bivvo_api_token', value }, { onConflict: 'key' });
+        .upsert({ 
+          key: 'bivvo_api_token', 
+          value,
+          description: `Atualizado por ${user.email} em ${new Date().toLocaleString('pt-BR')}`
+        }, { onConflict: 'key' });
       if (error) throw error;
-      await logAction(supabase, user, 'save-bivvo-token', 'admin_secrets', 'bivvo_api_token', null, null);
+      await logAction(supabase, user, 'save-bivvo-token', 'admin_secrets', 'bivvo_api_token', null, { has_value: !!value });
       return new Response(JSON.stringify({ ok: true }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
