@@ -826,6 +826,80 @@ const Admin = () => {
     setPlanDialog(true);
   };
 
+  const [channelDialog, setChannelDialog] = useState(false);
+  const [editingChannel, setEditingChannel] = useState<any>(null);
+  const [channelForm, setChannelForm] = useState<any>({
+    slug: '', label: '', unit_price: '', included: 0, 
+    emoji: '', icon_url: '', sort_order: 0, active: true
+  });
+
+  const openNewChannel = () => {
+    setEditingChannel(null);
+    setChannelForm({
+      slug: '', label: '', unit_price: '', included: 0, 
+      emoji: '', icon_url: '', sort_order: 0, active: true
+    });
+    setChannelDialog(true);
+  };
+
+  const openEditChannel = (channel: any) => {
+    setEditingChannel(channel);
+    setChannelForm({
+      slug: channel.slug,
+      label: channel.label,
+      unit_price: channel.unit_price.toString(),
+      included: channel.included || 0,
+      emoji: channel.emoji || '',
+      icon_url: channel.icon_url || '',
+      sort_order: channel.sort_order || 0,
+      active: channel.active
+    });
+    setChannelDialog(true);
+  };
+
+  const handleSaveChannel = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const channelData = {
+      ...channelForm,
+      unit_price: parseFloat(channelForm.unit_price),
+      included: parseInt(channelForm.included),
+      sort_order: parseInt(channelForm.sort_order)
+    };
+
+    let error;
+    if (editingChannel) {
+      const { error: err } = await supabase.from('channels').update(channelData).eq('id', editingChannel.id);
+      error = err;
+    } else {
+      const { error: err } = await supabase.from('channels').insert(channelData);
+      error = err;
+    }
+
+    if (error) {
+      toast({ title: 'Erro', description: error.message, variant: 'destructive' });
+    } else {
+      toast({ title: 'Sucesso', description: editingChannel ? 'Canal atualizado!' : 'Canal criado!' });
+      setChannelDialog(false);
+      loadChannels();
+    }
+  };
+
+  const handleChannelIconUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const { data, error } = await supabase.storage.from('marketing').upload(`icons/${Date.now()}-${file.name}`, file);
+    if (error) {
+      toast({ title: 'Erro no upload', description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    const { data: { publicUrl } } = supabase.storage.from('marketing').getPublicUrl(data.path);
+    setChannelForm(prev => ({ ...prev, icon_url: publicUrl }));
+    toast({ title: 'Sucesso', description: 'Ícone enviado!' });
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/admin/login');
@@ -1042,84 +1116,88 @@ const Admin = () => {
           <section>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Canais Adicionais</h2>
-              <Dialog>
+              <Dialog open={channelDialog} onOpenChange={setChannelDialog}>
                 <DialogTrigger asChild>
-                  <Button size="sm"><Plus className="h-4 w-4 mr-2" /> Novo Canal</Button>
+                  <Button size="sm" onClick={openNewChannel}><Plus className="h-4 w-4 mr-2" /> Novo Canal</Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Novo Canal</DialogTitle>
+                    <DialogTitle>{editingChannel ? 'Editar Canal' : 'Novo Canal'}</DialogTitle>
                   </DialogHeader>
-                  <form onSubmit={async (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    const file = formData.get('icon') as File;
-                    let icon_url = formData.get('icon_url') as string;
-
-                    if (file && file.size > 0) {
-                      const { data, error } = await supabase.storage.from('marketing').upload(`icons/${Date.now()}-${file.name}`, file);
-                      if (data) {
-                        const { data: { publicUrl } } = supabase.storage.from('marketing').getPublicUrl(data.path);
-                        icon_url = publicUrl;
-                      }
-                    }
-
-                    const channelData = {
-                      slug: (formData.get('slug') as string).toLowerCase().trim(),
-                      label: formData.get('label') as string,
-                      unit_price: parseFloat(formData.get('unit_price') as string),
-                      included: parseInt(formData.get('included') as string) || 0,
-                      emoji: formData.get('emoji') as string,
-                      icon_url,
-                      sort_order: parseInt(formData.get('sort_order') as string) || 0,
-                    };
-
-                    const { error } = await supabase.from('channels').insert(channelData);
-                    if (error) toast({ title: 'Erro', description: error.message, variant: 'destructive' });
-                    else {
-                      toast({ title: 'Sucesso', description: 'Canal criado!' });
-                      loadChannels();
-                    }
-                  }} className="space-y-4 pt-2">
+                  <form onSubmit={handleSaveChannel} className="space-y-4 pt-2">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label>Slug</Label>
-                        <Input name="slug" required placeholder="waof" />
+                        <Input 
+                          value={channelForm.slug} 
+                          onChange={e => setChannelForm(prev => ({ ...prev, slug: e.target.value.toLowerCase().trim() }))} 
+                          required 
+                          placeholder="waof" 
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label>Nome</Label>
-                        <Input name="label" required placeholder="WhatsApp API" />
+                        <Input 
+                          value={channelForm.label} 
+                          onChange={e => setChannelForm(prev => ({ ...prev, label: e.target.value }))} 
+                          required 
+                          placeholder="WhatsApp API" 
+                        />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label>Preço Unitário</Label>
-                        <Input name="unit_price" type="number" step="0.01" required />
+                        <Input 
+                          value={channelForm.unit_price} 
+                          onChange={e => setChannelForm(prev => ({ ...prev, unit_price: e.target.value }))} 
+                          type="number" 
+                          step="0.01" 
+                          required 
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label>Incluído no Plano</Label>
-                        <Input name="included" type="number" defaultValue="0" />
+                        <Input 
+                          value={channelForm.included} 
+                          onChange={e => setChannelForm(prev => ({ ...prev, included: e.target.value }))} 
+                          type="number" 
+                        />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label>Emoji (Opcional)</Label>
-                        <Input name="emoji" placeholder="📱" />
+                        <Input 
+                          value={channelForm.emoji} 
+                          onChange={e => setChannelForm(prev => ({ ...prev, emoji: e.target.value }))} 
+                          placeholder="📱" 
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label>Ordem</Label>
-                        <Input name="sort_order" type="number" defaultValue="0" />
+                        <Input 
+                          value={channelForm.sort_order} 
+                          onChange={e => setChannelForm(prev => ({ ...prev, sort_order: e.target.value }))} 
+                          type="number" 
+                        />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label>URL do Ícone (PNG/SVG)</Label>
-                      <Input name="icon_url" placeholder="https://..." />
+                      <Input 
+                        value={channelForm.icon_url} 
+                        onChange={e => setChannelForm(prev => ({ ...prev, icon_url: e.target.value }))} 
+                        placeholder="https://..." 
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label>Ou subir novo Ícone (PNG)</Label>
-                      <Input name="icon" type="file" accept="image/png" />
+                      <Input type="file" accept="image/png" onChange={handleChannelIconUpload} />
                     </div>
-                    <Button type="submit" className="w-full">Criar Canal</Button>
+                    <Button type="submit" className="w-full">
+                      {editingChannel ? 'Salvar Alterações' : 'Criar Canal'}
+                    </Button>
                   </form>
                 </DialogContent>
               </Dialog>
@@ -1155,7 +1233,10 @@ const Admin = () => {
                           loadChannels();
                         }} />
                       </TableCell>
-                      <TableCell className="text-right">
+                      <TableCell className="text-right space-x-1">
+                        <Button variant="ghost" size="sm" onClick={() => openEditChannel(channel)}>
+                          <Pencil className="h-4 w-4" />
+                        </Button>
                         <Button variant="ghost" size="sm" onClick={async () => {
                           if (confirm('Excluir este canal?')) {
                             await supabase.from('channels').delete().eq('id', channel.id);
