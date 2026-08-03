@@ -415,8 +415,14 @@ serve(async (req) => {
   try {
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const ASAAS_API_KEY = Deno.env.get('ASAAS_API_KEY')!;
-    const ASAAS_BASE_URL = Deno.env.get('ASAAS_BASE_URL')!;
+    const ASAAS_API_KEY = Deno.env.get('ASAAS_API_KEY') ?? '';
+    const ASAAS_BASE_URL = (Deno.env.get('ASAAS_BASE_URL') || 'https://api.asaas.com/v3').replace(/\/+$/, '');
+    if (!ASAAS_API_KEY) {
+      return new Response(
+        JSON.stringify({ error: 'Integração Asaas não configurada: cadastre o segredo ASAAS_API_KEY.' }),
+        { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
+    }
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
     const authHeader = req.headers.get('Authorization');
