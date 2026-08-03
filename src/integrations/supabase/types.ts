@@ -415,6 +415,48 @@ export type Database = {
           },
         ]
       }
+      channels: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          emoji: string | null
+          icon_url: string | null
+          id: string
+          included: number
+          label: string
+          slug: string
+          sort_order: number | null
+          unit_price: number
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          emoji?: string | null
+          icon_url?: string | null
+          id?: string
+          included?: number
+          label: string
+          slug: string
+          sort_order?: number | null
+          unit_price?: number
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          emoji?: string | null
+          icon_url?: string | null
+          id?: string
+          included?: number
+          label?: string
+          slug?: string
+          sort_order?: number | null
+          unit_price?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       coupons: {
         Row: {
           active: boolean | null

@@ -84,6 +84,7 @@ const Admin = () => {
 
   const [plans, setPlans] = useState<Plan[]>([]);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
+  const [channels, setChannels] = useState<any[]>([]);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [subsTotal, setSubsTotal] = useState(0);
   const [loadingData, setLoadingData] = useState(false);
@@ -307,10 +308,16 @@ const Admin = () => {
     if (isAdmin) {
       loadPlans();
       loadCoupons();
+      loadChannels();
       loadSubscriptions();
       loadCustomers();
     }
   }, [isAdmin]);
+
+  const loadChannels = async () => {
+    const { data } = await supabase.from('channels').select('*').order('sort_order');
+    if (data) setChannels(data);
+  };
 
   const loadCustomers = async () => {
     setLoadingCustomers(true);
@@ -865,8 +872,6 @@ const Admin = () => {
             <TabsTrigger value="plans" className="gap-2"><Package className="h-4 w-4" /> Planos</TabsTrigger>
             <TabsTrigger value="coupons" className="gap-2"><Ticket className="h-4 w-4" /> Cupons</TabsTrigger>
             <TabsTrigger value="subscriptions" className="gap-2"><Users className="h-4 w-4" /> Gestão de Assinaturas</TabsTrigger>
-
-
             <TabsTrigger value="affiliates" className="gap-2"><Handshake className="h-4 w-4" /> Afiliados</TabsTrigger>
             <TabsTrigger value="expenses" className="gap-2"><Receipt className="h-4 w-4" /> Despesas</TabsTrigger>
             <TabsTrigger value="marketing" className="gap-2"><Share2 className="h-4 w-4" /> Marketing</TabsTrigger>
@@ -905,8 +910,9 @@ const Admin = () => {
 
 
           {/* PLANS TAB */}
-
           <TabsContent value="plans">
+            <div className="space-y-8">
+              <section>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Planos</h2>
               <Dialog open={planDialog} onOpenChange={setPlanDialog}>
@@ -1031,7 +1037,140 @@ const Admin = () => {
                 </TableBody>
               </Table>
             </div>
-          </TabsContent>
+          </section>
+
+          <section>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold">Canais Adicionais</h2>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="sm"><Plus className="h-4 w-4 mr-2" /> Novo Canal</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Novo Canal</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const file = formData.get('icon') as File;
+                    let icon_url = formData.get('icon_url') as string;
+
+                    if (file && file.size > 0) {
+                      const { data, error } = await supabase.storage.from('marketing').upload(`icons/${Date.now()}-${file.name}`, file);
+                      if (data) {
+                        const { data: { publicUrl } } = supabase.storage.from('marketing').getPublicUrl(data.path);
+                        icon_url = publicUrl;
+                      }
+                    }
+
+                    const channelData = {
+                      slug: (formData.get('slug') as string).toLowerCase().trim(),
+                      label: formData.get('label') as string,
+                      unit_price: parseFloat(formData.get('unit_price') as string),
+                      included: parseInt(formData.get('included') as string) || 0,
+                      emoji: formData.get('emoji') as string,
+                      icon_url,
+                      sort_order: parseInt(formData.get('sort_order') as string) || 0,
+                    };
+
+                    const { error } = await supabase.from('channels').insert(channelData);
+                    if (error) toast({ title: 'Erro', description: error.message, variant: 'destructive' });
+                    else {
+                      toast({ title: 'Sucesso', description: 'Canal criado!' });
+                      loadChannels();
+                    }
+                  }} className="space-y-4 pt-2">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Slug</Label>
+                        <Input name="slug" required placeholder="waof" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Nome</Label>
+                        <Input name="label" required placeholder="WhatsApp API" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Preço Unitário</Label>
+                        <Input name="unit_price" type="number" step="0.01" required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Incluído no Plano</Label>
+                        <Input name="included" type="number" defaultValue="0" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Emoji (Opcional)</Label>
+                        <Input name="emoji" placeholder="📱" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Ordem</Label>
+                        <Input name="sort_order" type="number" defaultValue="0" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>URL do Ícone (PNG/SVG)</Label>
+                      <Input name="icon_url" placeholder="https://..." />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Ou subir novo Ícone (PNG)</Label>
+                      <Input name="icon" type="file" accept="image/png" />
+                    </div>
+                    <Button type="submit" className="w-full">Criar Canal</Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="card-glass rounded-xl overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Ícone</TableHead>
+                    <TableHead>Nome</TableHead>
+                    <TableHead>Slug</TableHead>
+                    <TableHead>Preço Unit.</TableHead>
+                    <TableHead>Ativo</TableHead>
+                    <TableHead className="text-right">Ações</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {channels.map(channel => (
+                    <TableRow key={channel.id}>
+                      <TableCell>
+                        {channel.icon_url ? (
+                          <img src={channel.icon_url} alt="" className="h-6 w-6 object-contain" />
+                        ) : (
+                          <span className="text-lg">{channel.emoji}</span>
+                        )}
+                      </TableCell>
+                      <TableCell className="font-medium">{channel.label}</TableCell>
+                      <TableCell className="text-muted-foreground">{channel.slug}</TableCell>
+                      <TableCell>{formatCurrency(channel.unit_price)}</TableCell>
+                      <TableCell>
+                        <Switch checked={channel.active} onCheckedChange={async (v) => {
+                          await supabase.from('channels').update({ active: v }).eq('id', channel.id);
+                          loadChannels();
+                        }} />
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm" onClick={async () => {
+                          if (confirm('Excluir este canal?')) {
+                            await supabase.from('channels').delete().eq('id', channel.id);
+                            loadChannels();
+                          }
+                        }}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </section>
+        </div>
+      </TabsContent>
 
           {/* COUPONS TAB */}
           <TabsContent value="coupons">
@@ -1599,12 +1738,12 @@ const Admin = () => {
                               <div className="pt-2">
                                 <p className="text-[10px] uppercase text-muted-foreground mb-1">Canais Contratados</p>
                                 <div className="grid grid-cols-2 gap-1">
-                                  {CANAIS_DEF.map(c => {
+                                  {channels.map(c => {
                                     const qty = Number((contractedConfig.channels || {})[c.id] || 0);
                                     if (!qty) return null;
                                     return (
                                       <div key={c.id} className="flex justify-between px-2 py-1 rounded bg-background/60 border text-[11px]">
-                                        <span>{c.emoji} {c.label}</span>
+                                        <span>{c.icon_url ? <img src={c.icon_url} className="w-3 h-3 inline-block mr-1" /> : c.emoji} {c.label}</span>
                                         <strong>{qty}</strong>
                                       </div>
                                     );
@@ -1658,9 +1797,9 @@ const Admin = () => {
                             <div className="pt-1">
                               <p className="text-[10px] uppercase text-muted-foreground mb-1">Canais Contratados</p>
                               <div className="grid grid-cols-2 gap-1.5">
-                                {CANAIS_DEF.map(c => (
+                                {channels.map(c => (
                                   <div key={c.id} className="flex items-center justify-between gap-2 px-2 py-1 rounded bg-background/60 border text-[11px]">
-                                    <span className="truncate">{c.emoji} {c.label}</span>
+                                    <span className="truncate">{c.icon_url ? <img src={c.icon_url} className="w-3 h-3 inline-block mr-1" /> : c.emoji} {c.label}</span>
                                     <Input type="number" min={0} className="h-6 w-14 text-xs"
                                       value={configForm.channels[c.id] || 0}
                                       onChange={(e) => setConfigForm(f => ({ ...f, channels: { ...f.channels, [c.id]: Number(e.target.value) || 0 } }))}
@@ -1969,12 +2108,12 @@ const Admin = () => {
                             <p className="text-[10px] text-muted-foreground uppercase">Canais Contratados</p>
                             <div className="flex flex-wrap gap-2">
                               {Object.entries(internalSub.channels_config || {}).map(([key, val]: [string, any]) => {
-                                const channel = CANAIS_DEF.find(c => c.id === key);
+                                const channel = channels.find(c => c.slug === key);
                                 if (!val || val === 0) return null;
                                 return (
                                   <Badge key={key} variant="secondary" className="text-[10px] py-0.5 px-2 flex items-center gap-1">
-                                    {channel?.logo ? (
-                                      <img src={channel.logo} alt={channel.label} className="w-3 h-3 object-contain" />
+                                    {channel?.icon_url ? (
+                                      <img src={channel.icon_url} alt={channel.label} className="w-3 h-3 object-contain" />
                                     ) : (
                                       <span>{channel?.emoji || '•'}</span>
                                     )}
