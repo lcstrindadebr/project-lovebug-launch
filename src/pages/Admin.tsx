@@ -1039,7 +1039,140 @@ const Admin = () => {
                 </TableBody>
               </Table>
             </div>
-          </TabsContent>
+          </section>
+
+          <section>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold">Canais Adicionais</h2>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="sm"><Plus className="h-4 w-4 mr-2" /> Novo Canal</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Novo Canal</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const file = formData.get('icon') as File;
+                    let icon_url = formData.get('icon_url') as string;
+
+                    if (file && file.size > 0) {
+                      const { data, error } = await supabase.storage.from('marketing').upload(`icons/${Date.now()}-${file.name}`, file);
+                      if (data) {
+                        const { data: { publicUrl } } = supabase.storage.from('marketing').getPublicUrl(data.path);
+                        icon_url = publicUrl;
+                      }
+                    }
+
+                    const channelData = {
+                      slug: (formData.get('slug') as string).toLowerCase().trim(),
+                      label: formData.get('label') as string,
+                      unit_price: parseFloat(formData.get('unit_price') as string),
+                      included: parseInt(formData.get('included') as string) || 0,
+                      emoji: formData.get('emoji') as string,
+                      icon_url,
+                      sort_order: parseInt(formData.get('sort_order') as string) || 0,
+                    };
+
+                    const { error } = await supabase.from('channels').insert(channelData);
+                    if (error) toast({ title: 'Erro', description: error.message, variant: 'destructive' });
+                    else {
+                      toast({ title: 'Sucesso', description: 'Canal criado!' });
+                      loadChannels();
+                    }
+                  }} className="space-y-4 pt-2">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Slug</Label>
+                        <Input name="slug" required placeholder="waof" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Nome</Label>
+                        <Input name="label" required placeholder="WhatsApp API" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Preço Unitário</Label>
+                        <Input name="unit_price" type="number" step="0.01" required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Incluído no Plano</Label>
+                        <Input name="included" type="number" defaultValue="0" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Emoji (Opcional)</Label>
+                        <Input name="emoji" placeholder="📱" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Ordem</Label>
+                        <Input name="sort_order" type="number" defaultValue="0" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>URL do Ícone (PNG/SVG)</Label>
+                      <Input name="icon_url" placeholder="https://..." />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Ou subir novo Ícone (PNG)</Label>
+                      <Input name="icon" type="file" accept="image/png" />
+                    </div>
+                    <Button type="submit" className="w-full">Criar Canal</Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="card-glass rounded-xl overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Ícone</TableHead>
+                    <TableHead>Nome</TableHead>
+                    <TableHead>Slug</TableHead>
+                    <TableHead>Preço Unit.</TableHead>
+                    <TableHead>Ativo</TableHead>
+                    <TableHead className="text-right">Ações</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {channels.map(channel => (
+                    <TableRow key={channel.id}>
+                      <TableCell>
+                        {channel.icon_url ? (
+                          <img src={channel.icon_url} alt="" className="h-6 w-6 object-contain" />
+                        ) : (
+                          <span className="text-lg">{channel.emoji}</span>
+                        )}
+                      </TableCell>
+                      <TableCell className="font-medium">{channel.label}</TableCell>
+                      <TableCell className="text-muted-foreground">{channel.slug}</TableCell>
+                      <TableCell>{formatCurrency(channel.unit_price)}</TableCell>
+                      <TableCell>
+                        <Switch checked={channel.active} onCheckedChange={async (v) => {
+                          await supabase.from('channels').update({ active: v }).eq('id', channel.id);
+                          loadChannels();
+                        }} />
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm" onClick={async () => {
+                          if (confirm('Excluir este canal?')) {
+                            await supabase.from('channels').delete().eq('id', channel.id);
+                            loadChannels();
+                          }
+                        }}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </section>
+        </div>
+      </TabsContent>
 
           {/* COUPONS TAB */}
           <TabsContent value="coupons">
