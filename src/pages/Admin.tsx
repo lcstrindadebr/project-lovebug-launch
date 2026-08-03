@@ -826,6 +826,80 @@ const Admin = () => {
     setPlanDialog(true);
   };
 
+  const [channelDialog, setChannelDialog] = useState(false);
+  const [editingChannel, setEditingChannel] = useState<any>(null);
+  const [channelForm, setChannelForm] = useState<any>({
+    slug: '', label: '', unit_price: '', included: 0, 
+    emoji: '', icon_url: '', sort_order: 0, active: true
+  });
+
+  const openNewChannel = () => {
+    setEditingChannel(null);
+    setChannelForm({
+      slug: '', label: '', unit_price: '', included: 0, 
+      emoji: '', icon_url: '', sort_order: 0, active: true
+    });
+    setChannelDialog(true);
+  };
+
+  const openEditChannel = (channel: any) => {
+    setEditingChannel(channel);
+    setChannelForm({
+      slug: channel.slug,
+      label: channel.label,
+      unit_price: channel.unit_price.toString(),
+      included: channel.included || 0,
+      emoji: channel.emoji || '',
+      icon_url: channel.icon_url || '',
+      sort_order: channel.sort_order || 0,
+      active: channel.active
+    });
+    setChannelDialog(true);
+  };
+
+  const handleSaveChannel = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const channelData = {
+      ...channelForm,
+      unit_price: parseFloat(channelForm.unit_price),
+      included: parseInt(channelForm.included),
+      sort_order: parseInt(channelForm.sort_order)
+    };
+
+    let error;
+    if (editingChannel) {
+      const { error: err } = await supabase.from('channels').update(channelData).eq('id', editingChannel.id);
+      error = err;
+    } else {
+      const { error: err } = await supabase.from('channels').insert(channelData);
+      error = err;
+    }
+
+    if (error) {
+      toast({ title: 'Erro', description: error.message, variant: 'destructive' });
+    } else {
+      toast({ title: 'Sucesso', description: editingChannel ? 'Canal atualizado!' : 'Canal criado!' });
+      setChannelDialog(false);
+      loadChannels();
+    }
+  };
+
+  const handleChannelIconUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const { data, error } = await supabase.storage.from('marketing').upload(`icons/${Date.now()}-${file.name}`, file);
+    if (error) {
+      toast({ title: 'Erro no upload', description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    const { data: { publicUrl } } = supabase.storage.from('marketing').getPublicUrl(data.path);
+    setChannelForm(prev => ({ ...prev, icon_url: publicUrl }));
+    toast({ title: 'Sucesso', description: 'Ícone enviado!' });
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/admin/login');
