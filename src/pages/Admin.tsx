@@ -84,6 +84,7 @@ const Admin = () => {
 
   const [plans, setPlans] = useState<Plan[]>([]);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
+  const [channels, setChannels] = useState<any[]>([]);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [subsTotal, setSubsTotal] = useState(0);
   const [loadingData, setLoadingData] = useState(false);
