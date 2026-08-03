@@ -981,6 +981,8 @@ export type Database = {
           person_type: string | null
           plano_ativo: string | null
           status: string | null
+          tenant_provision_error: string | null
+          tenant_provisioned_at: string | null
           updated_at: string | null
           whatsapp: string | null
         }
@@ -1015,6 +1017,8 @@ export type Database = {
           person_type?: string | null
           plano_ativo?: string | null
           status?: string | null
+          tenant_provision_error?: string | null
+          tenant_provisioned_at?: string | null
           updated_at?: string | null
           whatsapp?: string | null
         }
@@ -1049,6 +1053,8 @@ export type Database = {
           person_type?: string | null
           plano_ativo?: string | null
           status?: string | null
+          tenant_provision_error?: string | null
+          tenant_provisioned_at?: string | null
           updated_at?: string | null
           whatsapp?: string | null
         }
