@@ -47,6 +47,8 @@ const App = () => (
           />
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
+          <Route path="/admin/credentials" element={<AdminCredentials />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
