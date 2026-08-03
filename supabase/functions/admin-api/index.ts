@@ -1350,7 +1350,32 @@ serve(async (req) => {
       });
     }
 
+    // ── BIVVO API TOKEN ─────────────────────────────────────
+
+    if (action === 'get-bivvo-token') {
+      const { data, error } = await supabase
+        .from('admin_secrets').select('value').eq('key', 'bivvo_api_token').maybeSingle();
+      if (error) throw error;
+      return new Response(JSON.stringify({ value: data?.value || '' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (action === 'save-bivvo-token' && req.method === 'POST') {
+      const body = await req.json().catch(() => ({}));
+      const value = typeof body?.value === 'string' ? body.value.trim() : '';
+      const { error } = await supabase
+        .from('admin_secrets')
+        .upsert({ key: 'bivvo_api_token', value }, { onConflict: 'key' });
+      if (error) throw error;
+      await logAction(supabase, user, 'save-bivvo-token', 'admin_secrets', 'bivvo_api_token', null, null);
+      return new Response(JSON.stringify({ ok: true }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     // ── AFFILIATES ──────────────────────────────────────────
+
 
 
     if (action === 'list-affiliates') {
