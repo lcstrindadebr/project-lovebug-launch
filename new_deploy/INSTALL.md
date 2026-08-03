@@ -2,7 +2,7 @@
 
 Este guia foi criado para que **qualquer pessoa**, mesmo sem conhecimento técnico, consiga colocar o sistema Bivvo no ar.
 
-O código-fonte oficial fica em: **https://github.com/lcstrindadebr/bivvo-pagamento**
+O código-fonte oficial fica em: **https://github.com/lcstrindadebr/project-lovebug-launch**
 
 ---
 
