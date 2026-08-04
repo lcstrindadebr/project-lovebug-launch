@@ -546,11 +546,13 @@ fi
 
 echo ""
 echo -e "${BLUE}━━━━━ ETAPA 4/8: Clonando repositório ━━━━━${NC}"
-if [ -d "$APP_DIR" ]; then
+if [ -d "$APP_DIR/.git" ]; then
     echo -e "${YELLOW}Diretório já existe, atualizando...${NC}"
-    cd "$APP_DIR" && git -c core.askpass=true -c credential.helper= pull
+    cd "$APP_DIR" && git -c credential.helper= pull
 else
-    git -c core.askpass=true -c credential.helper= clone "$REPO_URL" "$APP_DIR"
+    # Se o diretório existe mas não é um repo git (ex: falha anterior), removemos para clonar limpo
+    [ -d "$APP_DIR" ] && rm -rf "$APP_DIR"
+    git -c credential.helper= clone "$REPO_URL" "$APP_DIR"
 fi
 
 
