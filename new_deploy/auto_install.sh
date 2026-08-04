@@ -514,9 +514,14 @@ case $OPTION in
 
     3)
         # Atualizar Supabase (menu individual)
+        # Sincroniza o código antes para garantir que os arquivos SQL e Functions estejam na versão mais nova
+        cd "$APP_DIR"
+        git -c credential.helper= fetch origin main
+        git -c credential.helper= reset --hard origin/main
         update_supabase_auto
         exit 0
         ;;
+
 
     4)
 
