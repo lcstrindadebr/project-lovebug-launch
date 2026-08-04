@@ -488,7 +488,7 @@ case $OPTION in
         # Atualizar Código
         echo ""
         echo -e "${BLUE}━━━━━ ATUALIZANDO CÓDIGO E SUPABASE ━━━━━${NC}"
-        cd "$APP_DIR" && git pull
+        cd "$APP_DIR" && git -c core.askpass=true pull
         run_build
         update_supabase_auto
         exit 0
