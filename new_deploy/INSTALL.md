@@ -2,7 +2,7 @@
 
 Este guia foi criado para que **qualquer pessoa**, mesmo sem conhecimento técnico, consiga colocar o sistema Bivvo no ar.
 
-O código-fonte oficial fica em: **https://github.com/lcstrindadebr/bivvo-pagamento**
+O código-fonte oficial fica em: **https://github.com/lcstrindadebr/project-lovebug-launch**
 
 ---
 
@@ -22,7 +22,7 @@ configura o `.env`, faz o build, configura o subdomínio e gera o SSL HTTPS.
 Conecte na VPS via SSH e cole:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lcstrindadebr/bivvo-pagamento/main/new_deploy/auto_install.sh -o install.sh
+curl -fsSL https://raw.githubusercontent.com/lcstrindadebr/project-lovebug-launch/main/new_deploy/auto_install.sh -o install.sh
 chmod +x install.sh
 sudo ./install.sh
 ```
@@ -112,7 +112,7 @@ Ele detectará que o sistema já está instalado e oferecerá as opções:
 Se preferir publicar as funções de uma vez pelo terminal (exige Docker):
 
 ```bash
-cd /opt/bivvo-pagamento
+cd /opt/project-lovebug-launch
 # Siga as instruções para logar e linkar o projeto
 npx supabase login
 npx supabase link --project-ref SEU_PROJECT_ID
@@ -126,7 +126,7 @@ npx supabase functions deploy --no-verify-jwt
 Para atualizar o banco de dados (schema base + migrations incrementais) direto pelo terminal da VPS:
 
 ```bash
-cd /opt/bivvo-pagamento
+cd /opt/project-lovebug-launch
 
 # Siga as instruções para logar e linkar o projeto
 npx supabase login
@@ -149,7 +149,7 @@ psql --dbname="$SUPABASE_DB_URL" -f new_deploy/migrations/005_task_enhancements.
 psql --dbname="$SUPABASE_DB_URL" -f new_deploy/migrations/006_finance_metrics.sql
 ```
 
-Se aparecer erro tentando conectar no socket local `/var/run/postgresql/.s.PGSQL.5432`, a `SUPABASE_DB_URL` foi colada/salva em formato incorreto. Apague a linha `SUPABASE_DB_URL=` do arquivo `/opt/bivvo-pagamento/.env` e execute o instalador novamente, colando somente a connection string completa do banco.
+Se aparecer erro tentando conectar no socket local `/var/run/postgresql/.s.PGSQL.5432`, a `SUPABASE_DB_URL` foi colada/salva em formato incorreto. Apague a linha `SUPABASE_DB_URL=` do arquivo `/opt/project-lovebug-launch/.env` e execute o instalador novamente, colando somente a connection string completa do banco.
 
 > 💡 O opção **3 do `auto_install.sh` (Atualizar Supabase)** faz todos esses passos automaticamente (login + link + deploy + schema + migrations).
 
