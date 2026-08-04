@@ -500,13 +500,17 @@ case $OPTION in
         # Garante que a origem está correta para evitar o erro do repositório antigo
         git remote set-url origin "$REPO_URL"
         
-        # Força o bypass de credenciais no pull
-        git -c credential.helper= pull origin main || git -c credential.helper= pull
+        # Em VPS de produção, o ideal é fazer o reset para o estado do repositório remoto
+        # para evitar erros de "divergent branches" ou conflitos locais acidentais.
+        echo -e "${YELLOW}Limpando alterações locais e sincronizando com o repositório remoto...${NC}"
+        git -c credential.helper= fetch origin main
+        git -c credential.helper= reset --hard origin/main
         
         run_build
         update_supabase_auto
         exit 0
         ;;
+
 
     3)
         # Atualizar Supabase (menu individual)
