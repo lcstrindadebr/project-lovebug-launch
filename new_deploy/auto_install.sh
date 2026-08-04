@@ -500,19 +500,28 @@ case $OPTION in
         # Garante que a origem está correta para evitar o erro do repositório antigo
         git remote set-url origin "$REPO_URL"
         
-        # Força o bypass de credenciais no pull
-        git -c credential.helper= pull origin main || git -c credential.helper= pull
+        # Em VPS de produção, o ideal é fazer o reset para o estado do repositório remoto
+        # para evitar erros de "divergent branches" ou conflitos locais acidentais.
+        echo -e "${YELLOW}Limpando alterações locais e sincronizando com o repositório remoto...${NC}"
+        git -c credential.helper= fetch origin main
+        git -c credential.helper= reset --hard origin/main
         
         run_build
         update_supabase_auto
         exit 0
         ;;
 
+
     3)
         # Atualizar Supabase (menu individual)
+        # Sincroniza o código antes para garantir que os arquivos SQL e Functions estejam na versão mais nova
+        cd "$APP_DIR"
+        git -c credential.helper= fetch origin main
+        git -c credential.helper= reset --hard origin/main
         update_supabase_auto
         exit 0
         ;;
+
 
     4)
 
@@ -558,12 +567,14 @@ fi
 echo ""
 echo -e "${BLUE}━━━━━ ETAPA 4/8: Clonando repositório ━━━━━${NC}"
 if [ -d "$APP_DIR/.git" ]; then
-    echo -e "${YELLOW}Diretório já existe, atualizando origem e fazendo pull...${NC}"
+    echo -e "${YELLOW}Diretório já existe, sincronizando com repositório remoto...${NC}"
     cd "$APP_DIR"
     git remote set-url origin "$REPO_URL"
-    git -c credential.helper= pull origin main || git -c credential.helper= pull
+    git -c credential.helper= fetch origin main
+    git -c credential.helper= reset --hard origin/main
 else
     # Se o diretório existe mas não é um repo git (ex: falha anterior), removemos para clonar limpo
+
     [ -d "$APP_DIR" ] && rm -rf "$APP_DIR"
     git -c credential.helper= clone "$REPO_URL" "$APP_DIR"
 fi
