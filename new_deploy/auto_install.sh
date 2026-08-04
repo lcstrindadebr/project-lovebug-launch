@@ -495,11 +495,19 @@ case $OPTION in
         # Atualizar Código
         echo ""
         echo -e "${BLUE}━━━━━ ATUALIZANDO CÓDIGO E SUPABASE ━━━━━${NC}"
-        cd "$APP_DIR" && git -c credential.helper= pull
+        cd "$APP_DIR"
+        
+        # Garante que a origem está correta para evitar o erro do repositório antigo
+        git remote set-url origin "$REPO_URL"
+        
+        # Força o bypass de credenciais no pull
+        git -c credential.helper= pull origin main || git -c credential.helper= pull
+        
         run_build
         update_supabase_auto
         exit 0
         ;;
+
     3)
         # Atualizar Supabase (menu individual)
         update_supabase_auto
