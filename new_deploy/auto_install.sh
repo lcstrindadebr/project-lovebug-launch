@@ -20,8 +20,11 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 REPO_URL="https://github.com/lcstrindadebr/project-lovebug-launch.git"
-GIT_TERMINAL_PROMPT=0 # Impede que o git peça credenciais se o repo falhar ou for privado
-export GIT_TERMINAL_PROMPT
+# Configurações para garantir que o Git não peça senha em repositório público
+export GIT_TERMINAL_PROMPT=0
+export GCM_INTERACTIVE=never
+export GIT_ASKPASS=/bin/true
+
 APP_DIR="/opt/bivvo-pagamento"
 WEB_DIR="/var/www/bivvo"
 
@@ -488,7 +491,7 @@ case $OPTION in
         # Atualizar Código
         echo ""
         echo -e "${BLUE}━━━━━ ATUALIZANDO CÓDIGO E SUPABASE ━━━━━${NC}"
-        cd "$APP_DIR" && git -c core.askpass=true pull
+        cd "$APP_DIR" && git -c core.askpass=true -c credential.helper= pull
         run_build
         update_supabase_auto
         exit 0
@@ -544,10 +547,11 @@ echo ""
 echo -e "${BLUE}━━━━━ ETAPA 4/8: Clonando repositório ━━━━━${NC}"
 if [ -d "$APP_DIR" ]; then
     echo -e "${YELLOW}Diretório já existe, atualizando...${NC}"
-    cd "$APP_DIR" && git -c core.askpass=true pull
+    cd "$APP_DIR" && git -c core.askpass=true -c credential.helper= pull
 else
-    git -c core.askpass=true clone "$REPO_URL" "$APP_DIR"
+    git -c core.askpass=true -c credential.helper= clone "$REPO_URL" "$APP_DIR"
 fi
+
 
 echo ""
 echo -e "${BLUE}━━━━━ ETAPA 5/8: Configurando variáveis ━━━━━${NC}"
