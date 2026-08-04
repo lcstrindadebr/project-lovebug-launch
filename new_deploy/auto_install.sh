@@ -24,7 +24,7 @@ REPO_URL="https://github.com/lcstrindadebr/project-lovebug-launch.git"
 export GIT_TERMINAL_PROMPT=0
 export GCM_INTERACTIVE=never
 export GIT_ASKPASS=/bin/true
-export GIT_CONFIG_PARAMETERS="'credential.helper='"
+export GIT_CONFIG_PARAMETERS="credential.helper="
 
 APP_DIR="/opt/bivvo-pagamento"
 WEB_DIR="/var/www/bivvo"
@@ -492,7 +492,7 @@ case $OPTION in
         # Atualizar Código
         echo ""
         echo -e "${BLUE}━━━━━ ATUALIZANDO CÓDIGO E SUPABASE ━━━━━${NC}"
-        cd "$APP_DIR" && git -c core.askpass=true -c credential.helper= pull
+        cd "$APP_DIR" && git -c credential.helper= pull
         run_build
         update_supabase_auto
         exit 0
@@ -546,11 +546,13 @@ fi
 
 echo ""
 echo -e "${BLUE}━━━━━ ETAPA 4/8: Clonando repositório ━━━━━${NC}"
-if [ -d "$APP_DIR" ]; then
+if [ -d "$APP_DIR/.git" ]; then
     echo -e "${YELLOW}Diretório já existe, atualizando...${NC}"
-    cd "$APP_DIR" && git -c core.askpass=true -c credential.helper= pull
+    cd "$APP_DIR" && git -c credential.helper= pull
 else
-    git -c core.askpass=true -c credential.helper= clone "$REPO_URL" "$APP_DIR"
+    # Se o diretório existe mas não é um repo git (ex: falha anterior), removemos para clonar limpo
+    [ -d "$APP_DIR" ] && rm -rf "$APP_DIR"
+    git -c credential.helper= clone "$REPO_URL" "$APP_DIR"
 fi
 
 
