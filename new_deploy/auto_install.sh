@@ -24,7 +24,7 @@ REPO_URL="https://github.com/lcstrindadebr/project-lovebug-launch.git"
 export GIT_TERMINAL_PROMPT=0
 export GCM_INTERACTIVE=never
 export GIT_ASKPASS=/bin/true
-export GIT_CONFIG_PARAMETERS="'credential.helper='"
+export GIT_CONFIG_PARAMETERS="credential.helper="
 
 APP_DIR="/opt/bivvo-pagamento"
 WEB_DIR="/var/www/bivvo"
