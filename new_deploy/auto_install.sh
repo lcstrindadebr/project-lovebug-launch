@@ -20,6 +20,8 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 REPO_URL="https://github.com/lcstrindadebr/project-lovebug-launch.git"
+GIT_TERMINAL_PROMPT=0 # Impede que o git peça credenciais se o repo falhar ou for privado
+export GIT_TERMINAL_PROMPT
 APP_DIR="/opt/bivvo-pagamento"
 WEB_DIR="/var/www/bivvo"
 
