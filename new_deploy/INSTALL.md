@@ -22,7 +22,7 @@ configura o `.env`, faz o build, configura o subdomínio e gera o SSL HTTPS.
 Conecte na VPS via SSH e cole:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lcstrindadebr/bivvo-pagamento/main/new_deploy/auto_install.sh -o install.sh
+curl -fsSL https://raw.githubusercontent.com/lcstrindadebr/project-lovebug-launch/main/new_deploy/auto_install.sh -o install.sh
 chmod +x install.sh
 sudo ./install.sh
 ```
