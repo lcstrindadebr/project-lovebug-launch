@@ -496,7 +496,62 @@ export function AdminTasks() {
             );
           })}
         </div>
+      ) : view === 'matrix' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { id: 'q1', label: 'Q1 · Fazer Agora (Crise)', important: true, urgent: true, color: 'border-l-4 border-l-destructive bg-destructive/5' },
+            { id: 'q2', label: 'Q2 · Agendar (Estratégico)', important: true, urgent: false, color: 'border-l-4 border-l-blue-600 bg-blue-50/50' },
+            { id: 'q3', label: 'Q3 · Delegar (Interrupção)', important: false, urgent: true, color: 'border-l-4 border-l-amber-500 bg-amber-50/50' },
+            { id: 'q4', label: 'Q4 · Eliminar (Ruído)', important: false, urgent: false, color: 'border-l-4 border-l-slate-400 bg-slate-50/50' },
+          ].map((q) => {
+            const qTasks = filtered.filter(t => t.is_important === q.important && t.is_urgent === q.urgent);
+            return (
+              <div 
+                key={q.id} 
+                className={cn("rounded-lg border p-4 min-h-[250px]", q.color)}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const id = e.dataTransfer.getData('text/plain');
+                  if (id) updateTask(id, { is_important: q.important, is_urgent: q.urgent });
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-sm uppercase tracking-wider">{q.label}</h3>
+                  <Badge variant="outline">{qTasks.length}</Badge>
+                </div>
+                <div className="space-y-2">
+                  {qTasks.map(task => (
+                    <Card 
+                      key={task.id} 
+                      draggable 
+                      onDragStart={(e) => e.dataTransfer.setData('text/plain', task.id)}
+                      className="p-3 cursor-pointer hover:shadow-md transition-shadow"
+                      onClick={() => openEdit(task)}
+                    >
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="text-xs font-medium line-clamp-2">{task.title}</span>
+                        {task.due_date && <Clock className={cn("h-3 w-3 shrink-0", isOverdue(task) ? "text-destructive" : "text-muted-foreground")} />}
+                      </div>
+                      {task.department && (
+                        <span className="text-[9px] text-muted-foreground uppercase mt-1 block">
+                          {DEPARTMENTS.find(d => d.value === task.department)?.label || task.department}
+                        </span>
+                      )}
+                    </Card>
+                  ))}
+                  {qTasks.length === 0 && (
+                    <div className="h-20 flex items-center justify-center border border-dashed rounded text-xs text-muted-foreground">
+                      Vazio
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       ) : (
+
         <div className="border rounded-md">
           <Table>
             <TableHeader>
