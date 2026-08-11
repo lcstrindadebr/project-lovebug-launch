@@ -49,7 +49,7 @@ Mesma migration replicada em `new_deploy/migrations/012_eisenhower_matrix.sql` p
 3. **Arrastar entre quadrantes**: soltar um card em outro quadrante atualiza `is_important`/`is_urgent` (mesmo mecanismo de drag já usado no Kanban).
 4. **Badge de quadrante** nos cards do Kanban e na tabela da Lista, ao lado da prioridade.
 5. **Filtro por quadrante** na barra de filtros existente, junto de status/prioridade/responsável.
-6. **Ordenação**: dentro de cada coluna do Kanban, ordenar por quadrante (Q1→Q2→Q3→Q4) e depois por data de vencimento.
+6. **Ordenação**: dentro de cada coluna do Kanban, ordenar primeiro pela data de vencimento (mais próxima antes, vencidas no topo, sem data por último) e só depois por quadrante (Q1→Q2→Q3→Q4).
 7. **Indicador de carga**: pequeno resumo no topo — quantas tarefas em cada quadrante e alerta visual quando Q1 passa de 3 por responsável.
 
 ## Fora de escopo
