@@ -31,6 +31,7 @@ Regra operacional sugerida: se um membro tem mais de 3 tarefas em Q1, o time est
 Nova migration adicionando em `public.tasks`:
 - `is_important boolean not null default true`
 - `is_urgent boolean not null default false`
+- `department text` (financeiro, marketing, comercial, suporte, desenvolvimento, outro)
 - coluna gerada/derivada opcional não é necessária — o quadrante é calculado no front.
 
 Backfill a partir da prioridade atual:
