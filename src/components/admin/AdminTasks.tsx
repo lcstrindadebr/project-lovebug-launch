@@ -173,6 +173,9 @@ export function AdminTasks() {
           ...t,
           subtasks: normalizeSubtasks(t.subtasks),
           waiting_third_party: !!t.waiting_third_party,
+          is_important: t.is_important ?? true,
+          is_urgent: t.is_urgent ?? false,
+          department: t.department || null,
         })) as Task[],
       );
     }
