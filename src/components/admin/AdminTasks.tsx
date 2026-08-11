@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import {
   Plus, Trash2, CheckCircle2, Circle, LayoutGrid, List, User as UserIcon,
-  Search, Calendar, Pencil, Clock, ListChecks, Hourglass,
+  Search, Calendar, Pencil, Clock, ListChecks, Hourglass, Grid2X2,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
