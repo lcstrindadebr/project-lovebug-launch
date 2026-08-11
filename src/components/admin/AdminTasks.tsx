@@ -279,6 +279,9 @@ export function AdminTasks() {
       due_date: form.due_date ? new Date(Date.UTC(parseInt(form.due_date.slice(0, 4)), parseInt(form.due_date.slice(5, 7)) - 1, parseInt(form.due_date.slice(8, 10)))).toISOString() : null,
       waiting_third_party: form.waiting_third_party,
       subtasks: form.subtasks,
+      is_important: form.is_important,
+      is_urgent: form.is_urgent,
+      department: form.department === 'outro' ? null : form.department,
     };
     const { error } = form.id
       ? await supabase.from('tasks').update(payload).eq('id', form.id)
