@@ -1,50 +1,64 @@
+# Matriz de Eisenhower na aba de Tarefas
 
-## Problema detectado
+## Conceito aplicado ao time
 
-Hoje existem **duas colunas paralelas** na tabela `users` representando o mesmo dado (o ID do tenant na API Bivvo), e cada parte do código usa uma delas:
+Cada tarefa passa a ter dois atributos independentes:
 
-| Coluna | Onde é lida/escrita |
-|---|---|
-| `tenant_bivvo` | `admin-api` (checagem de status via `tenantApiShowTenant`, listagem de assinaturas, ação `update-user-tenant`, `refresh-all-bivvo-statuses`) |
-| `bivvo_tenant_id` | `_shared/bivvo-api.ts` (store/update/inactivate na Bivvo), `provision-bivvo-tenant`, `auto-inactivate-overdue`, `Admin.tsx` (Setup Bivvo / Ações do Tenant) |
+- **Importância** (impacta resultado/receita/cliente): sim ou não
+- **Urgência** (prazo curto, bloqueia alguém, risco imediato): sim ou não
 
-Consequência prática:
-- Ao salvar o Tenant ID em "Setup Bivvo" (grava em `bivvo_tenant_id`), a coluna `bivvo_status` (que consulta `tenant_bivvo`) continua vazia — o status "Inserir ID" nunca sai.
-- `refresh-all-bivvo-statuses` ignora tenants provisionados pelo fluxo automático.
-- `handleSaveTenant` da UI e a action `update-user-tenant` gravam em campos diferentes.
+Isso gera 4 quadrantes:
 
-## Objetivo
+```text
+                URGENTE            NÃO URGENTE
+IMPORTANTE   Q1 FAZER AGORA      Q2 AGENDAR
+             (crise, SLA)        (estratégico, prevenção)
 
-Consolidar tudo em **um único campo canônico: `bivvo_tenant_id`** (nome mais semântico e já usado pelo fluxo de provisionamento). Remover `tenant_bivvo` após migrar os dados.
+NÃO          Q3 DELEGAR          Q4 ELIMINAR
+IMPORTANTE   (interrupções)      (ruído, "quando sobrar")
+```
 
-## Passos
+Uso prático combinado ao que já existe hoje:
+- **Q1** → prioridade Alta, prazo definido, dono obrigatório.
+- **Q2** → onde o time deve gastar a maior parte do tempo; exige data agendada.
+- **Q3** → candidata natural ao campo `assigned_to` (delegar) ou ao flag "aguardando terceiro".
+- **Q4** → não entra no Kanban ativo; vira backlog/arquivo.
 
-### 1. Migração SQL
-- Copiar valores existentes: `UPDATE users SET bivvo_tenant_id = COALESCE(bivvo_tenant_id, tenant_bivvo) WHERE tenant_bivvo IS NOT NULL;`
-- `ALTER TABLE users DROP COLUMN tenant_bivvo;`
+Regra operacional sugerida: se um membro tem mais de 3 tarefas em Q1, o time está em modo apagar incêndio — a reunião semanal olha o gráfico de distribuição e puxa esforço para Q2.
 
-### 2. `supabase/functions/admin-api/index.ts`
-Substituir todas as referências a `tenant_bivvo` por `bivvo_tenant_id`:
-- `checkBivvoStatus` (linhas ~85, 96): usar `u.bivvo_tenant_id`.
-- Listagem de assinaturas (linhas ~145, 227, 314, 315): selecionar `bivvo_tenant_id`; manter chave de retorno `tenantBivvo` no JSON para não quebrar a UI, mas alimentada por `bivvo_tenant_id`.
-- Ação `update-user-tenant` (linhas ~1079, 1086): gravar em `bivvo_tenant_id`. Também zerar `tenant_provisioned_at` / `tenant_provision_error` se o ID mudar manualmente (opcional, mais coerente).
-- `refresh-all-bivvo-statuses` (linha 1141): selecionar `bivvo_tenant_id`.
+## Mudanças no banco
 
-### 3. Frontend `src/pages/Admin.tsx`
-- `handleSaveTenant`: já grava em `bivvo_tenant_id`. Adicional: **após salvar, também disparar imediatamente `check-bivvo-tenant`** (ou chamar `refresh-all-bivvo-statuses` só para esse usuário) para popular `bivvo_status` na hora — assim o card "Detalhes da Assinatura" mostra status correto sem esperar cron.
-- Nenhuma mudança de UI/labels: continua "Setup Bivvo" / "Tenant Bivvo".
+Nova migration adicionando em `public.tasks`:
+- `is_important boolean not null default true`
+- `is_urgent boolean not null default false`
+- coluna gerada/derivada opcional não é necessária — o quadrante é calculado no front.
 
-### 4. `src/integrations/supabase/types.ts`
-- Remover as três aparições de `tenant_bivvo` (Row / Insert / Update) da tabela `users`. (Se o arquivo for autogerado, deixar que próximo pull do schema regenere.)
+Backfill a partir da prioridade atual:
+- `high` → importante + urgente (Q1)
+- `medium` → importante, não urgente (Q2)
+- `low` → não importante, não urgente (Q4)
 
-### 5. Verificação
-- Grep final: `rg "tenant_bivvo" src supabase` deve retornar apenas linhas em `supabase/migrations/` antigas (histórico) — nenhum código ativo.
-- Fluxo end-to-end: salvar ID manual → status atualiza; provisionar via botão → mesmo campo alimenta status; inativar → mesmo campo.
+O campo `priority` continua existindo (compatibilidade e ordenação), mas passa a ser **derivado automaticamente** do quadrante ao salvar: Q1=alta, Q2=média, Q3=média, Q4=baixa.
+
+Mesma migration replicada em `new_deploy/migrations/012_eisenhower_matrix.sql` para o servidor externo.
+
+## Mudanças na interface (`AdminTasks.tsx`)
+
+1. **Formulário de tarefa**: dois switches — "Importante" e "Urgente" — com o quadrante resultante exibido em tempo real ("Q1 · Fazer agora"). Substituem a escolha manual de prioridade.
+2. **Nova visão "Matriz"**: terceiro botão ao lado de Kanban e Lista, mostrando uma grade 2x2 com as tarefas em cards, contagem por quadrante e cores próprias por quadrante (vermelho/azul/âmbar/cinza, via tokens do design system).
+3. **Arrastar entre quadrantes**: soltar um card em outro quadrante atualiza `is_important`/`is_urgent` (mesmo mecanismo de drag já usado no Kanban).
+4. **Badge de quadrante** nos cards do Kanban e na tabela da Lista, ao lado da prioridade.
+5. **Filtro por quadrante** na barra de filtros existente, junto de status/prioridade/responsável.
+6. **Ordenação**: dentro de cada coluna do Kanban, ordenar por quadrante (Q1→Q2→Q3→Q4) e depois por data de vencimento.
+7. **Indicador de carga**: pequeno resumo no topo — quantas tarefas em cada quadrante e alerta visual quando Q1 passa de 3 por responsável.
 
 ## Fora de escopo
-- `new_deploy/` e `deploy/` (snapshots de exportação): não tocamos.
-- Renomear `bivvo_tenant_id` para outro nome: mantemos como está.
-- Nenhuma mudança em `_shared/bivvo-api.ts`, `provision-bivvo-tenant`, `auto-inactivate-overdue` — já usam o campo correto.
 
-## Riscos
-- Se algum usuário em produção só tem `tenant_bivvo` preenchido (não `bivvo_tenant_id`), a migração cobre com `COALESCE`. Após deploy da migração, `tenant_bivvo` deixa de existir; qualquer código externo que ainda consulte essa coluna quebra — não há consumidores fora do próprio projeto.
+- Automatizar urgência com base na data de vencimento (pode virar uma segunda etapa).
+- Relatórios históricos de distribuição por quadrante.
+
+## Ordem de execução
+
+1. Migration no Cloud + backfill.
+2. Atualizar tipos e `AdminTasks.tsx` (form, matriz, badges, filtro).
+3. Copiar migration para `new_deploy/migrations/` e atualizar `INSTALL.md`.
