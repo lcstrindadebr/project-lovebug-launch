@@ -361,11 +361,29 @@ export function AdminTasks() {
             {DEPARTMENTS.map((d) => <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>)}
           </SelectContent>
         </Select>
-        <div className="flex gap-1">
-          <Button variant={view === 'kanban' ? 'default' : 'outline'} size="sm" onClick={() => setView('kanban')}>
+        <div className="flex bg-muted p-1 rounded-md">
+          <Button
+            variant={view === 'kanban' ? 'secondary' : 'ghost'}
+            size="sm"
+            onClick={() => setView('kanban')}
+            className="h-8 px-3"
+          >
             <LayoutGrid className="h-4 w-4 mr-1" /> Kanban
           </Button>
-          <Button variant={view === 'list' ? 'default' : 'outline'} size="sm" onClick={() => setView('list')}>
+          <Button
+            variant={view === 'matrix' ? 'secondary' : 'ghost'}
+            size="sm"
+            onClick={() => setView('matrix')}
+            className="h-8 px-3"
+          >
+            <Grid2X2 className="h-4 w-4 mr-1" /> Matriz
+          </Button>
+          <Button
+            variant={view === 'list' ? 'secondary' : 'ghost'}
+            size="sm"
+            onClick={() => setView('list')}
+            className="h-8 px-3"
+          >
             <List className="h-4 w-4 mr-1" /> Lista
           </Button>
         </div>
