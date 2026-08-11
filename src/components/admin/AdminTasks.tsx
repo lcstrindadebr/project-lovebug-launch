@@ -241,6 +241,9 @@ export function AdminTasks() {
       due_date: t.due_date ? t.due_date.slice(0, 10) : '',
       waiting_third_party: !!t.waiting_third_party,
       subtasks: normalizeSubtasks(t.subtasks),
+      is_important: t.is_important,
+      is_urgent: t.is_urgent,
+      department: t.department || 'outro',
     });
     setNewSubtaskTitle('');
     setDialogOpen(true);
