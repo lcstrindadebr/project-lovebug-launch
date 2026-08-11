@@ -601,6 +601,15 @@ export function AdminTasks() {
                 onKeyDown={(e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveTask(); }}
                 autoFocus
               />
+              <div>
+                <Label>Departamento</Label>
+                <Select value={form.department || 'outro'} onValueChange={(v) => setForm({ ...form, department: v })}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {DEPARTMENTS.map((d) => <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             <div>
               <Label htmlFor="t-desc">Descrição</Label>
