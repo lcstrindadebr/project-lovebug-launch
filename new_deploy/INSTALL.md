@@ -43,7 +43,7 @@ O instalador deixa a aplicação no ar, mas o **backend (Supabase)** precisa ser
 
 ### 1️⃣ Criar / atualizar as tabelas do banco
 - No painel do Supabase, abra **SQL Editor → New Query**
-- **Instalação nova:** cole em ordem `new_deploy/database_schema.sql` → `migrations/003` → `004` → `005` → `006` → `007` → `008` → `009` → `010`.
+- **Instalação nova:** cole em ordem `new_deploy/database_schema.sql` → `migrations/003` → `004` → `005` → `006` → `007` → `008` → `009` → `010` → `011` → `012`.
 - **Atualização de uma instância já existente:** rode apenas as migrations novas em ordem. Todas são idempotentes.
 - Clique em **Run** após cada uma.
 
