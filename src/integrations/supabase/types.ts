@@ -930,9 +930,12 @@ export type Database = {
           assigned_to: string | null
           completed_at: string | null
           created_at: string
+          department: string | null
           description: string | null
           due_date: string | null
           id: string
+          is_important: boolean
+          is_urgent: boolean
           priority: string
           status: string
           subtasks: Json
@@ -944,9 +947,12 @@ export type Database = {
           assigned_to?: string | null
           completed_at?: string | null
           created_at?: string
+          department?: string | null
           description?: string | null
           due_date?: string | null
           id?: string
+          is_important?: boolean
+          is_urgent?: boolean
           priority?: string
           status?: string
           subtasks?: Json
@@ -958,9 +964,12 @@ export type Database = {
           assigned_to?: string | null
           completed_at?: string | null
           created_at?: string
+          department?: string | null
           description?: string | null
           due_date?: string | null
           id?: string
+          is_important?: boolean
+          is_urgent?: boolean
           priority?: string
           status?: string
           subtasks?: Json

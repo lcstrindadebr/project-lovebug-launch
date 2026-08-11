@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import {
   Plus, Trash2, CheckCircle2, Circle, LayoutGrid, List, User as UserIcon,
-  Search, Calendar, Pencil, Clock, ListChecks, Hourglass,
+  Search, Calendar, Pencil, Clock, ListChecks, Hourglass, Grid2X2,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -41,6 +41,9 @@ interface Task {
   completed_at: string | null;
   subtasks: Subtask[] | null;
   waiting_third_party: boolean;
+  is_important: boolean;
+  is_urgent: boolean;
+  department: string | null;
 }
 
 interface AdminUser {
@@ -63,6 +66,15 @@ const PRIORITY_VARIANT: Record<string, string> = {
   low: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30 dark:text-emerald-400',
 };
 
+const DEPARTMENTS = [
+  { value: 'financeiro', label: 'Financeiro' },
+  { value: 'marketing', label: 'Marketing' },
+  { value: 'comercial', label: 'Comercial' },
+  { value: 'suporte', label: 'Suporte' },
+  { value: 'desenvolvimento', label: 'Desenvolvimento' },
+  { value: 'outro', label: 'Outro' },
+];
+
 const emptyForm = {
   id: '' as string | undefined,
   title: '',
@@ -73,6 +85,9 @@ const emptyForm = {
   due_date: '',
   waiting_third_party: false,
   subtasks: [] as Subtask[],
+  is_important: true,
+  is_urgent: false,
+  department: 'outro',
 };
 
 function parseDate(dateStr: string | null): Date | null {
@@ -138,7 +153,7 @@ function normalizeSubtasks(raw: any): Subtask[] {
 export function AdminTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [users, setUsers] = useState<AdminUser[]>([]);
-  const [view, setView] = useState<'kanban' | 'list'>('kanban');
+  const [view, setView] = useState<'kanban' | 'list' | 'matrix'>('kanban');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [form, setForm] = useState<typeof emptyForm>(emptyForm);
@@ -149,6 +164,7 @@ export function AdminTasks() {
   const [search, setSearch] = useState('');
   const [filterAssignee, setFilterAssignee] = useState('all');
   const [filterPriority, setFilterPriority] = useState('all');
+  const [filterDepartment, setFilterDepartment] = useState('all');
 
   const loadTasks = async () => {
     const { data } = await supabase.from('tasks').select('*').order('created_at', { ascending: false });
@@ -158,6 +174,9 @@ export function AdminTasks() {
           ...t,
           subtasks: normalizeSubtasks(t.subtasks),
           waiting_third_party: !!t.waiting_third_party,
+          is_important: t.is_important ?? true,
+          is_urgent: t.is_urgent ?? false,
+          department: t.department || null,
         })) as Task[],
       );
     }
@@ -190,20 +209,31 @@ export function AdminTasks() {
         if (filterAssignee === 'unassigned' ? t.assigned_to !== null : t.assigned_to !== filterAssignee) return false;
       }
       if (filterPriority !== 'all' && t.priority !== filterPriority) return false;
+      if (filterDepartment !== 'all') {
+        const dept = t.department || 'outro';
+        if (dept !== filterDepartment) return false;
+      }
       return true;
     });
-  }, [tasks, search, filterAssignee, filterPriority]);
+  }, [tasks, search, filterAssignee, filterPriority, filterDepartment]);
 
   const sortedForColumn = (status: string) => {
     return filtered
       .filter((t) => t.status === status)
       .sort((a, b) => {
-        const pa = PRIORITY_ORDER[a.priority] ?? 3;
-        const pb = PRIORITY_ORDER[b.priority] ?? 3;
-        if (pa !== pb) return pa - pb;
+        // 1. Due date (nearest/overdue first)
         const da = a.due_date ? (parseDate(a.due_date)?.getTime() ?? Infinity) : Infinity;
         const db = b.due_date ? (parseDate(b.due_date)?.getTime() ?? Infinity) : Infinity;
-        return da - db;
+        if (da !== db) return da - db;
+
+        // 2. Quadrant (Q1 -> Q2 -> Q3 -> Q4)
+        const getRank = (t: Task) => {
+          if (t.is_important && t.is_urgent) return 1; // Q1
+          if (t.is_important && !t.is_urgent) return 2; // Q2
+          if (!t.is_important && t.is_urgent) return 3; // Q3
+          return 4; // Q4
+        };
+        return getRank(a) - getRank(b);
       });
   };
 
@@ -223,6 +253,9 @@ export function AdminTasks() {
       due_date: t.due_date ? t.due_date.slice(0, 10) : '',
       waiting_third_party: !!t.waiting_third_party,
       subtasks: normalizeSubtasks(t.subtasks),
+      is_important: t.is_important,
+      is_urgent: t.is_urgent,
+      department: t.department || 'outro',
     });
     setNewSubtaskTitle('');
     setDialogOpen(true);
@@ -252,12 +285,15 @@ export function AdminTasks() {
     const payload: any = {
       title: form.title.trim(),
       description: form.description.trim() || null,
-      priority: form.priority,
+      priority: form.is_important ? (form.is_urgent ? 'high' : 'medium') : (form.is_urgent ? 'medium' : 'low'),
       status: form.status,
       assigned_to: form.assigned_to === 'unassigned' ? null : form.assigned_to,
       due_date: form.due_date ? new Date(Date.UTC(parseInt(form.due_date.slice(0, 4)), parseInt(form.due_date.slice(5, 7)) - 1, parseInt(form.due_date.slice(8, 10)))).toISOString() : null,
       waiting_third_party: form.waiting_third_party,
       subtasks: form.subtasks,
+      is_important: form.is_important,
+      is_urgent: form.is_urgent,
+      department: form.department === 'outro' ? null : form.department,
     };
     const { error } = form.id
       ? await supabase.from('tasks').update(payload).eq('id', form.id)
@@ -325,11 +361,36 @@ export function AdminTasks() {
             <SelectItem value="low">Baixa</SelectItem>
           </SelectContent>
         </Select>
-        <div className="flex gap-1">
-          <Button variant={view === 'kanban' ? 'default' : 'outline'} size="sm" onClick={() => setView('kanban')}>
+        <Select value={filterDepartment} onValueChange={setFilterDepartment}>
+          <SelectTrigger className="w-full lg:w-40"><SelectValue placeholder="Departamento" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todos depts</SelectItem>
+            {DEPARTMENTS.map((d) => <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>)}
+          </SelectContent>
+        </Select>
+        <div className="flex bg-muted p-1 rounded-md">
+          <Button
+            variant={view === 'kanban' ? 'secondary' : 'ghost'}
+            size="sm"
+            onClick={() => setView('kanban')}
+            className="h-8 px-3"
+          >
             <LayoutGrid className="h-4 w-4 mr-1" /> Kanban
           </Button>
-          <Button variant={view === 'list' ? 'default' : 'outline'} size="sm" onClick={() => setView('list')}>
+          <Button
+            variant={view === 'matrix' ? 'secondary' : 'ghost'}
+            size="sm"
+            onClick={() => setView('matrix')}
+            className="h-8 px-3"
+          >
+            <Grid2X2 className="h-4 w-4 mr-1" /> Matriz
+          </Button>
+          <Button
+            variant={view === 'list' ? 'secondary' : 'ghost'}
+            size="sm"
+            onClick={() => setView('list')}
+            className="h-8 px-3"
+          >
             <List className="h-4 w-4 mr-1" /> Lista
           </Button>
         </div>
@@ -381,11 +442,18 @@ export function AdminTasks() {
                               ? <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                               : <Circle className="h-4 w-4 text-muted-foreground hover:text-foreground" />}
                           </button>
-                          <p className={cn('text-sm font-medium flex-1', task.status === 'done' && 'line-through opacity-60')}>
-                            {task.title}
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <p className={cn('text-sm font-medium', task.status === 'done' && 'line-through opacity-60')}>
+                              {task.title}
+                            </p>
+                            {task.department && (
+                              <span className="text-[10px] text-muted-foreground font-normal uppercase tracking-wider block">
+                                {DEPARTMENTS.find(d => d.value === task.department)?.label || task.department}
+                              </span>
+                            )}
+                          </div>
                           <Button
-                            variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                            variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100 shrink-0"
                             onClick={(e) => { e.stopPropagation(); setDeleteId(task.id); }}
                           >
                             <Trash2 className="h-3 w-3 text-destructive" />
@@ -435,7 +503,62 @@ export function AdminTasks() {
             );
           })}
         </div>
+      ) : view === 'matrix' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { id: 'q1', label: 'Q1 · Fazer Agora (Crise)', important: true, urgent: true, color: 'border-l-4 border-l-destructive bg-destructive/5' },
+            { id: 'q2', label: 'Q2 · Agendar (Estratégico)', important: true, urgent: false, color: 'border-l-4 border-l-blue-600 bg-blue-50/50' },
+            { id: 'q3', label: 'Q3 · Delegar (Interrupção)', important: false, urgent: true, color: 'border-l-4 border-l-amber-500 bg-amber-50/50' },
+            { id: 'q4', label: 'Q4 · Eliminar (Ruído)', important: false, urgent: false, color: 'border-l-4 border-l-slate-400 bg-slate-50/50' },
+          ].map((q) => {
+            const qTasks = filtered.filter(t => t.is_important === q.important && t.is_urgent === q.urgent);
+            return (
+              <div 
+                key={q.id} 
+                className={cn("rounded-lg border p-4 min-h-[250px]", q.color)}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const id = e.dataTransfer.getData('text/plain');
+                  if (id) updateTask(id, { is_important: q.important, is_urgent: q.urgent });
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-sm uppercase tracking-wider">{q.label}</h3>
+                  <Badge variant="outline">{qTasks.length}</Badge>
+                </div>
+                <div className="space-y-2">
+                  {qTasks.map(task => (
+                    <Card 
+                      key={task.id} 
+                      draggable 
+                      onDragStart={(e) => e.dataTransfer.setData('text/plain', task.id)}
+                      className="p-3 cursor-pointer hover:shadow-md transition-shadow"
+                      onClick={() => openEdit(task)}
+                    >
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="text-xs font-medium line-clamp-2">{task.title}</span>
+                        {task.due_date && <Clock className={cn("h-3 w-3 shrink-0", isOverdue(task) ? "text-destructive" : "text-muted-foreground")} />}
+                      </div>
+                      {task.department && (
+                        <span className="text-[9px] text-muted-foreground uppercase mt-1 block">
+                          {DEPARTMENTS.find(d => d.value === task.department)?.label || task.department}
+                        </span>
+                      )}
+                    </Card>
+                  ))}
+                  {qTasks.length === 0 && (
+                    <div className="h-20 flex items-center justify-center border border-dashed rounded text-xs text-muted-foreground">
+                      Vazio
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       ) : (
+
         <div className="border rounded-md">
           <Table>
             <TableHeader>
@@ -461,19 +584,26 @@ export function AdminTasks() {
                     </button>
                   </TableCell>
                   <TableCell className={cn(task.status === 'done' && 'line-through')}>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => openEdit(task)} className="text-left hover:underline">
-                        {task.title}
-                      </button>
-                      {task.waiting_third_party && (
-                        <Badge variant="outline" className="text-[10px] gap-1 bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/40">
-                          <Hourglass className="h-2.5 w-2.5" /> Aguardando
-                        </Badge>
-                      )}
-                      {(task.subtasks?.length ?? 0) > 0 && (
-                        <Badge variant="outline" className="text-[10px] gap-1">
-                          <ListChecks className="h-2.5 w-2.5" /> {task.subtasks!.filter((s) => s.done).length}/{task.subtasks!.length}
-                        </Badge>
+                    <div className="flex flex-col gap-0.5">
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => openEdit(task)} className="text-left hover:underline font-medium text-sm">
+                          {task.title}
+                        </button>
+                        {task.waiting_third_party && (
+                          <Badge variant="outline" className="text-[10px] gap-1 bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/40">
+                            <Hourglass className="h-2.5 w-2.5" /> Aguardando
+                          </Badge>
+                        )}
+                        {(task.subtasks?.length ?? 0) > 0 && (
+                          <Badge variant="outline" className="text-[10px] gap-1">
+                            <ListChecks className="h-2.5 w-2.5" /> {task.subtasks!.filter((s) => s.done).length}/{task.subtasks!.length}
+                          </Badge>
+                        )}
+                      </div>
+                      {task.department && (
+                        <span className="text-[10px] text-muted-foreground uppercase tracking-tight">
+                          {DEPARTMENTS.find(d => d.value === task.department)?.label || task.department}
+                        </span>
                       )}
                     </div>
                     {task.description && (
@@ -551,6 +681,15 @@ export function AdminTasks() {
                 onKeyDown={(e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveTask(); }}
                 autoFocus
               />
+              <div>
+                <Label>Departamento</Label>
+                <Select value={form.department || 'outro'} onValueChange={(v) => setForm({ ...form, department: v })}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {DEPARTMENTS.map((d) => <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             <div>
               <Label htmlFor="t-desc">Descrição</Label>
@@ -562,16 +701,37 @@ export function AdminTasks() {
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div>
-                <Label>Prioridade</Label>
-                <Select value={form.priority} onValueChange={(v) => setForm({ ...form, priority: v })}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="high">Alta</SelectItem>
-                    <SelectItem value="medium">Média</SelectItem>
-                    <SelectItem value="low">Baixa</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="space-y-4 pt-2 border-t">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label className="text-sm font-medium">Urgente</Label>
+                    <p className="text-[10px] text-muted-foreground">Prazo curto ou crítico</p>
+                  </div>
+                  <Checkbox
+                    checked={form.is_urgent}
+                    onCheckedChange={(v) => setForm({ ...form, is_urgent: !!v })}
+                    className="h-5 w-5"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label className="text-sm font-medium">Importante</Label>
+                    <p className="text-[10px] text-muted-foreground">Alto impacto no resultado</p>
+                  </div>
+                  <Checkbox
+                    checked={form.is_important}
+                    onCheckedChange={(v) => setForm({ ...form, is_important: !!v })}
+                    className="h-5 w-5"
+                  />
+                </div>
+                
+                <div className="bg-muted/50 p-2 rounded text-center">
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-1">Quadrante Eisenhower</span>
+                  {form.is_important && form.is_urgent && <Badge className="bg-destructive text-destructive-foreground">Q1 · Fazer Agora (Crise)</Badge>}
+                  {form.is_important && !form.is_urgent && <Badge className="bg-blue-600 text-white">Q2 · Agendar (Estratégico)</Badge>}
+                  {!form.is_important && form.is_urgent && <Badge className="bg-amber-500 text-white">Q3 · Delegar (Interrupção)</Badge>}
+                  {!form.is_important && !form.is_urgent && <Badge className="bg-slate-400 text-white">Q4 · Eliminar (Ruído)</Badge>}
+                </div>
               </div>
               <div>
                 <Label>Status</Label>
