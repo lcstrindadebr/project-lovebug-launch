@@ -417,11 +417,18 @@ export function AdminTasks() {
                               ? <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                               : <Circle className="h-4 w-4 text-muted-foreground hover:text-foreground" />}
                           </button>
-                          <p className={cn('text-sm font-medium flex-1', task.status === 'done' && 'line-through opacity-60')}>
-                            {task.title}
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <p className={cn('text-sm font-medium', task.status === 'done' && 'line-through opacity-60')}>
+                              {task.title}
+                            </p>
+                            {task.department && (
+                              <span className="text-[10px] text-muted-foreground font-normal uppercase tracking-wider block">
+                                {DEPARTMENTS.find(d => d.value === task.department)?.label || task.department}
+                              </span>
+                            )}
+                          </div>
                           <Button
-                            variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                            variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100 shrink-0"
                             onClick={(e) => { e.stopPropagation(); setDeleteId(task.id); }}
                           >
                             <Trash2 className="h-3 w-3 text-destructive" />
