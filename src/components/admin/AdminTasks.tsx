@@ -209,9 +209,13 @@ export function AdminTasks() {
         if (filterAssignee === 'unassigned' ? t.assigned_to !== null : t.assigned_to !== filterAssignee) return false;
       }
       if (filterPriority !== 'all' && t.priority !== filterPriority) return false;
+      if (filterDepartment !== 'all') {
+        const dept = t.department || 'outro';
+        if (dept !== filterDepartment) return false;
+      }
       return true;
     });
-  }, [tasks, search, filterAssignee, filterPriority]);
+  }, [tasks, search, filterAssignee, filterPriority, filterDepartment]);
 
   const sortedForColumn = (status: string) => {
     return filtered
