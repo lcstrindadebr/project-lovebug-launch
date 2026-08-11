@@ -621,16 +621,37 @@ export function AdminTasks() {
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div>
-                <Label>Prioridade</Label>
-                <Select value={form.priority} onValueChange={(v) => setForm({ ...form, priority: v })}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="high">Alta</SelectItem>
-                    <SelectItem value="medium">Média</SelectItem>
-                    <SelectItem value="low">Baixa</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="space-y-4 pt-2 border-t">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label className="text-sm font-medium">Urgente</Label>
+                    <p className="text-[10px] text-muted-foreground">Prazo curto ou crítico</p>
+                  </div>
+                  <Checkbox
+                    checked={form.is_urgent}
+                    onCheckedChange={(v) => setForm({ ...form, is_urgent: !!v })}
+                    className="h-5 w-5"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label className="text-sm font-medium">Importante</Label>
+                    <p className="text-[10px] text-muted-foreground">Alto impacto no resultado</p>
+                  </div>
+                  <Checkbox
+                    checked={form.is_important}
+                    onCheckedChange={(v) => setForm({ ...form, is_important: !!v })}
+                    className="h-5 w-5"
+                  />
+                </div>
+                
+                <div className="bg-muted/50 p-2 rounded text-center">
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-1">Quadrante Eisenhower</span>
+                  {form.is_important && form.is_urgent && <Badge className="bg-destructive text-destructive-foreground">Q1 · Fazer Agora (Crise)</Badge>}
+                  {form.is_important && !form.is_urgent && <Badge className="bg-blue-600 text-white">Q2 · Agendar (Estratégico)</Badge>}
+                  {!form.is_important && form.is_urgent && <Badge className="bg-amber-500 text-white">Q3 · Delegar (Interrupção)</Badge>}
+                  {!form.is_important && !form.is_urgent && <Badge className="bg-slate-400 text-white">Q4 · Eliminar (Ruído)</Badge>}
+                </div>
               </div>
               <div>
                 <Label>Status</Label>
