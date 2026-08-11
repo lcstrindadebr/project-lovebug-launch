@@ -66,6 +66,15 @@ const PRIORITY_VARIANT: Record<string, string> = {
   low: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30 dark:text-emerald-400',
 };
 
+const DEPARTMENTS = [
+  { value: 'financeiro', label: 'Financeiro' },
+  { value: 'marketing', label: 'Marketing' },
+  { value: 'comercial', label: 'Comercial' },
+  { value: 'suporte', label: 'Suporte' },
+  { value: 'desenvolvimento', label: 'Desenvolvimento' },
+  { value: 'outro', label: 'Outro' },
+];
+
 const emptyForm = {
   id: '' as string | undefined,
   title: '',
@@ -76,6 +85,9 @@ const emptyForm = {
   due_date: '',
   waiting_third_party: false,
   subtasks: [] as Subtask[],
+  is_important: true,
+  is_urgent: false,
+  department: 'outro',
 };
 
 function parseDate(dateStr: string | null): Date | null {
