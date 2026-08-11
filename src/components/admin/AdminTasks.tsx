@@ -41,6 +41,9 @@ interface Task {
   completed_at: string | null;
   subtasks: Subtask[] | null;
   waiting_third_party: boolean;
+  is_important: boolean;
+  is_urgent: boolean;
+  department: string | null;
 }
 
 interface AdminUser {
