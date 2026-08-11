@@ -354,6 +354,13 @@ export function AdminTasks() {
             <SelectItem value="low">Baixa</SelectItem>
           </SelectContent>
         </Select>
+        <Select value={filterDepartment} onValueChange={setFilterDepartment}>
+          <SelectTrigger className="w-full lg:w-40"><SelectValue placeholder="Departamento" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todos depts</SelectItem>
+            {DEPARTMENTS.map((d) => <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>)}
+          </SelectContent>
+        </Select>
         <div className="flex gap-1">
           <Button variant={view === 'kanban' ? 'default' : 'outline'} size="sm" onClick={() => setView('kanban')}>
             <LayoutGrid className="h-4 w-4 mr-1" /> Kanban
