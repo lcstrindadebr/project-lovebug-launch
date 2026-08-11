@@ -504,19 +504,26 @@ export function AdminTasks() {
                     </button>
                   </TableCell>
                   <TableCell className={cn(task.status === 'done' && 'line-through')}>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => openEdit(task)} className="text-left hover:underline">
-                        {task.title}
-                      </button>
-                      {task.waiting_third_party && (
-                        <Badge variant="outline" className="text-[10px] gap-1 bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/40">
-                          <Hourglass className="h-2.5 w-2.5" /> Aguardando
-                        </Badge>
-                      )}
-                      {(task.subtasks?.length ?? 0) > 0 && (
-                        <Badge variant="outline" className="text-[10px] gap-1">
-                          <ListChecks className="h-2.5 w-2.5" /> {task.subtasks!.filter((s) => s.done).length}/{task.subtasks!.length}
-                        </Badge>
+                    <div className="flex flex-col gap-0.5">
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => openEdit(task)} className="text-left hover:underline font-medium text-sm">
+                          {task.title}
+                        </button>
+                        {task.waiting_third_party && (
+                          <Badge variant="outline" className="text-[10px] gap-1 bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/40">
+                            <Hourglass className="h-2.5 w-2.5" /> Aguardando
+                          </Badge>
+                        )}
+                        {(task.subtasks?.length ?? 0) > 0 && (
+                          <Badge variant="outline" className="text-[10px] gap-1">
+                            <ListChecks className="h-2.5 w-2.5" /> {task.subtasks!.filter((s) => s.done).length}/{task.subtasks!.length}
+                          </Badge>
+                        )}
+                      </div>
+                      {task.department && (
+                        <span className="text-[10px] text-muted-foreground uppercase tracking-tight">
+                          {DEPARTMENTS.find(d => d.value === task.department)?.label || task.department}
+                        </span>
                       )}
                     </div>
                     {task.description && (
