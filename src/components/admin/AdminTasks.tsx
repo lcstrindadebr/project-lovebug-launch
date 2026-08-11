@@ -153,7 +153,7 @@ function normalizeSubtasks(raw: any): Subtask[] {
 export function AdminTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [users, setUsers] = useState<AdminUser[]>([]);
-  const [view, setView] = useState<'kanban' | 'list'>('kanban');
+  const [view, setView] = useState<'kanban' | 'list' | 'matrix'>('kanban');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [form, setForm] = useState<typeof emptyForm>(emptyForm);
