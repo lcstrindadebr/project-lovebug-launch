@@ -54,6 +54,8 @@ O instalador deixa a aplicação no ar, mas o **backend (Supabase)** precisa ser
 > 💡 `008_missing_admin_and_finance.sql` completa o schema com `admin_secrets` e Dashboards Financeiros.
 > 💡 `009_bivvo_api_token.sql` adiciona gerenciamento do Token de API da Bivvo.
 > 💡 `010_security_hardening_and_channels.sql` aplica correções de segurança (RLS), permissões de planos e canais dinâmicos.
+> 💡 `011_unified_security_policy.sql` unifica as políticas de acesso para administradores em todas as tabelas.
+> 💡 `012_eisenhower_matrix.sql` adiciona suporte à Matriz de Eisenhower e departamentos nas tarefas.
 
 ### 2️⃣ Cadastrar os Secrets (Asaas)
 Vá em **Edge Functions → Secrets** e adicione:
