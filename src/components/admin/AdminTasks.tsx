@@ -278,7 +278,7 @@ export function AdminTasks() {
     const payload: any = {
       title: form.title.trim(),
       description: form.description.trim() || null,
-      priority: form.priority,
+      priority: form.is_important ? (form.is_urgent ? 'high' : 'medium') : (form.is_urgent ? 'medium' : 'low'),
       status: form.status,
       assigned_to: form.assigned_to === 'unassigned' ? null : form.assigned_to,
       due_date: form.due_date ? new Date(Date.UTC(parseInt(form.due_date.slice(0, 4)), parseInt(form.due_date.slice(5, 7)) - 1, parseInt(form.due_date.slice(8, 10)))).toISOString() : null,
