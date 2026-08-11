@@ -221,12 +221,19 @@ export function AdminTasks() {
     return filtered
       .filter((t) => t.status === status)
       .sort((a, b) => {
-        const pa = PRIORITY_ORDER[a.priority] ?? 3;
-        const pb = PRIORITY_ORDER[b.priority] ?? 3;
-        if (pa !== pb) return pa - pb;
+        // 1. Due date (nearest/overdue first)
         const da = a.due_date ? (parseDate(a.due_date)?.getTime() ?? Infinity) : Infinity;
         const db = b.due_date ? (parseDate(b.due_date)?.getTime() ?? Infinity) : Infinity;
-        return da - db;
+        if (da !== db) return da - db;
+
+        // 2. Quadrant (Q1 -> Q2 -> Q3 -> Q4)
+        const getRank = (t: Task) => {
+          if (t.is_important && t.is_urgent) return 1; // Q1
+          if (t.is_important && !t.is_urgent) return 2; // Q2
+          if (!t.is_important && t.is_urgent) return 3; // Q3
+          return 4; // Q4
+        };
+        return getRank(a) - getRank(b);
       });
   };
 
