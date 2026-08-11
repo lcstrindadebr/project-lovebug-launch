@@ -49,7 +49,7 @@ Mesma migration replicada em `new_deploy/migrations/012_eisenhower_matrix.sql` p
 2. **Nova visão "Matriz"**: terceiro botão ao lado de Kanban e Lista, mostrando uma grade 2x2 com as tarefas em cards, contagem por quadrante e cores próprias por quadrante (vermelho/azul/âmbar/cinza, via tokens do design system).
 3. **Arrastar entre quadrantes**: soltar um card em outro quadrante atualiza `is_important`/`is_urgent` (mesmo mecanismo de drag já usado no Kanban).
 4. **Badge de quadrante** nos cards do Kanban e na tabela da Lista, ao lado da prioridade.
-5. **Filtro por quadrante** na barra de filtros existente, junto de status/prioridade/responsável.
+5. **Filtro por quadrante e departamento** na barra de filtros existente, junto de status/prioridade/responsável.
 6. **Ordenação**: dentro de cada coluna do Kanban, ordenar primeiro pela data de vencimento (mais próxima antes, vencidas no topo, sem data por último) e só depois por quadrante (Q1→Q2→Q3→Q4).
 7. **Indicador de carga**: pequeno resumo no topo — quantas tarefas em cada quadrante e alerta visual quando Q1 passa de 3 por responsável.
 
