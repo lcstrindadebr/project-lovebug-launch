@@ -164,6 +164,7 @@ export function AdminTasks() {
   const [search, setSearch] = useState('');
   const [filterAssignee, setFilterAssignee] = useState('all');
   const [filterPriority, setFilterPriority] = useState('all');
+  const [filterDepartment, setFilterDepartment] = useState('all');
 
   const loadTasks = async () => {
     const { data } = await supabase.from('tasks').select('*').order('created_at', { ascending: false });
