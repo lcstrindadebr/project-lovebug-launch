@@ -60,6 +60,6 @@ Mesma migration replicada em `new_deploy/migrations/012_eisenhower_matrix.sql` p
 
 ## Ordem de execução
 
-1. Migration no Cloud + backfill.
-2. Atualizar tipos e `AdminTasks.tsx` (form, matriz, badges, filtro).
+1. Migration no Cloud + backfill. (CONCLUÍDO)
+2. Atualizar tipos e `AdminTasks.tsx` (form, matriz, badges, filtro). (EM ANDAMENTO - Departamentos aplicados)
 3. Copiar migration para `new_deploy/migrations/` e atualizar `INSTALL.md`.
