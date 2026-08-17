@@ -100,10 +100,35 @@ sudo ./install.sh
 ```
 
 Ele detectará que o sistema já está instalado e oferecerá as opções:
-1. **Manutenção:** Alterar URL/Chave do Supabase, API Key do Asaas ou trocar o subdomínio (reconfigura Nginx e SSL).
+1. **Manutenção:** Alterar URL/Chave do Supabase, API Key do Asaas, trocar o subdomínio (reconfigura Nginx e SSL) ou ver o diagnóstico.
 2. **Atualizar Código:** Faz um `git pull` e gera um novo build automaticamente.
 3. **Atualizar Supabase:** Publica automaticamente as Edge Functions e aplica o SQL do banco usando suas credenciais já salvas (requer um Access Token do Supabase, gerado em https://supabase.com/dashboard/account/tokens).
 4. **Reinstalação:** Remove e instala tudo do zero.
+5. **Diagnóstico da instalação:** Mostra pasta do app, pasta web, remote git, commit/branch atual, domínio do Nginx, presença do `.env`, data do último build e status do Nginx/Node.
+
+---
+
+## 🔎 Detecção de instalações existentes e migração de caminho
+
+O instalador faz uma varredura antes de exibir o menu, então ele reconhece instalações antigas mesmo depois da troca do repositório:
+
+- Caminhos conhecidos, nesta ordem: `/opt/bivvo-pagamento`, `/opt/project-lovebug-launch`, `/opt/bivvo`.
+- Varredura de `/opt/*` e `/var/www/*` procurando pastas com `package.json` + `new_deploy/`, ou um `.git` cujo `origin` aponte para o repositório antigo ou o novo.
+- Arquivos `.env` contendo `VITE_SUPABASE_URL`.
+- Configuração do Nginx em `/etc/nginx/sites-available/bivvo` (de onde extrai o domínio e o `root` real, usado como pasta web).
+- Site publicado em `/var/www/bivvo`.
+
+Se o site/Nginx existirem mas o código-fonte não for encontrado, o script informa **instalação parcial** e oferece reinstalar apenas o código-fonte, preservando o domínio.
+
+**Migração do caminho antigo:** quando a instalação for encontrada fora de `/opt/project-lovebug-launch`, o script mostra o que achou (pasta, domínio, remote) e oferece:
+
+1. **Migrar** para `/opt/project-lovebug-launch`, preservando `.env` e `supabase-secrets.env`, corrigindo o `git remote` e recarregando o Nginx.
+2. **Continuar** no caminho atual (apenas corrige o `git remote` para o repositório novo).
+3. **Reinstalação completa.**
+
+Se o `origin` ainda apontar para o repositório antigo, ele é corrigido automaticamente antes do `git pull`. Caso o `pull` falhe por histórico divergente, o script explica o motivo e oferece um `fetch + reset --hard origin/main` (o `.env` é preservado).
+
+
 
 
 
