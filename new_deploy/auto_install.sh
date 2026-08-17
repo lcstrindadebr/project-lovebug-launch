@@ -567,32 +567,94 @@ echo -e "${BLUE}=============================================================${N
 
 check_root
 
-if [ -d "$APP_DIR" ]; then
-    echo -e "${GREEN}✓ Instalação detectada em $APP_DIR${NC}"
-    echo ""
-    echo "1) 🛠️  Manutenção (Trocar credenciais / Domínio)"
-    echo "2) 🔄 Atualizar Código (Git Pull + Build)"
-    echo "3) ⚡ Atualizar Supabase (Functions + SQL)"
-    echo "4) 🧹 Reinstalação Completa (Apaga tudo e instala do zero)"
-    echo "5) ❌ Sair"
-    echo ""
-    read -p "Escolha uma opção: " OPTION
+echo -e "${BLUE}→ Procurando instalações existentes no servidor...${NC}"
+set +e
+detect_installation
+DETECT_STATUS=$?
+set -e
 
-    if [ "$OPTION" == "4" ]; then
-        echo -e "${RED}⚠️  ATENÇÃO: Isso apagará TODOS os dados locais e configurações em $APP_DIR e $WEB_DIR!${NC}"
-        read -p "Tem certeza? (s/N): " CONFIRM
-        if [[ "$CONFIRM" =~ ^[Ss]$ ]]; then
-            echo -e "${YELLOW}Removendo instalação anterior...${NC}"
-            rm -rf "$APP_DIR"
-            rm -rf "$WEB_DIR"
-            # O fluxo continuará para a instalação completa (OPTION 4 abaixo)
-        else
-            echo -e "${BLUE}Operação cancelada.${NC}"
+if [ "$DETECT_STATUS" -eq 0 ]; then
+    echo -e "${GREEN}✓ Instalação detectada em $APP_DIR${NC}"
+    echo -e "${GREEN}  Pasta web: $WEB_DIR${NC}"
+    CURRENT_REMOTE=$(git_remote_of "$APP_DIR")
+    [ -n "$CURRENT_REMOTE" ] && echo -e "${GREEN}  Remote git: $CURRENT_REMOTE${NC}"
+    DETECTED_DOMAIN=$(nginx_domain)
+    [ -n "$DETECTED_DOMAIN" ] && echo -e "${GREEN}  Domínio: $DETECTED_DOMAIN${NC}"
+
+    if [ "$APP_DIR" != "$DEFAULT_APP_DIR" ]; then
+        echo ""
+        echo -e "${YELLOW}⚠️  A instalação está em um caminho diferente do padrão ($DEFAULT_APP_DIR).${NC}"
+        echo "1) Migrar para $DEFAULT_APP_DIR (preserva .env e secrets)"
+        echo "2) Continuar usando $APP_DIR (apenas corrige o remote git)"
+        echo "3) Reinstalação completa"
+        read -p "Escolha: " MIGOPT
+        case "$MIGOPT" in
+            1) migrate_app_dir ;;
+            3)
+                echo -e "${RED}⚠️  Isso apagará $APP_DIR e $WEB_DIR!${NC}"
+                read -p "Tem certeza? (s/N): " CONFIRM
+                if [[ "$CONFIRM" =~ ^[Ss]$ ]]; then
+                    rm -rf "$APP_DIR" "$WEB_DIR"
+                    APP_DIR="$DEFAULT_APP_DIR"
+                    WEB_DIR="$DEFAULT_WEB_DIR"
+                    OPTION="4"
+                else
+                    exit 0
+                fi
+                ;;
+            *) fix_git_remote ;;
+        esac
+    else
+        fix_git_remote
+    fi
+
+    if [ -z "${OPTION:-}" ]; then
+        echo ""
+        echo "1) 🛠️  Manutenção (Trocar credenciais / Domínio)"
+        echo "2) 🔄 Atualizar Código (Git Pull + Build)"
+        echo "3) ⚡ Atualizar Supabase (Functions + SQL)"
+        echo "4) 🧹 Reinstalação Completa (Apaga tudo e instala do zero)"
+        echo "5) 🔎 Diagnóstico da instalação"
+        echo "6) ❌ Sair"
+        echo ""
+        read -p "Escolha uma opção: " OPTION
+
+        if [ "$OPTION" == "5" ]; then
+            show_diagnostics
             exit 0
         fi
+
+        if [ "$OPTION" == "4" ]; then
+            echo -e "${RED}⚠️  ATENÇÃO: Isso apagará TODOS os dados locais e configurações em $APP_DIR e $WEB_DIR!${NC}"
+            read -p "Tem certeza? (s/N): " CONFIRM
+            if [[ "$CONFIRM" =~ ^[Ss]$ ]]; then
+                echo -e "${YELLOW}Removendo instalação anterior...${NC}"
+                rm -rf "$APP_DIR"
+                rm -rf "$WEB_DIR"
+                APP_DIR="$DEFAULT_APP_DIR"
+                WEB_DIR="$DEFAULT_WEB_DIR"
+            else
+                echo -e "${BLUE}Operação cancelada.${NC}"
+                exit 0
+            fi
+        fi
     fi
+elif [ "$DETECT_STATUS" -eq 2 ]; then
+    echo -e "${YELLOW}⚠️  Instalação PARCIAL detectada (site/nginx presentes, código-fonte ausente).${NC}"
+    echo -e "${YELLOW}   Pasta web: $WEB_DIR | Domínio: $(nginx_domain)${NC}"
+    echo ""
+    echo "1) 🚀 Reinstalar código-fonte (clona em $DEFAULT_APP_DIR e refaz o build)"
+    echo "2) 🔎 Diagnóstico"
+    echo "3) ❌ Sair"
+    echo ""
+    read -p "Escolha uma opção: " OPTION
+    case "$OPTION" in
+        1) APP_DIR="$DEFAULT_APP_DIR"; OPTION="4" ;;
+        2) show_diagnostics; exit 0 ;;
+        *) exit 0 ;;
+    esac
 else
-    echo -e "${YELLOW}Nenhuma instalação detectada.${NC}"
+    echo -e "${YELLOW}Nenhuma instalação detectada (procurado em /opt e /var/www).${NC}"
     echo ""
     echo "1) 🚀 Instalação Completa"
     echo "2) ❌ Sair"
@@ -600,6 +662,7 @@ else
     read -p "Escolha uma opção: " OPTION
     [ "$OPTION" == "1" ] && OPTION="4" || exit 0
 fi
+
 
 case $OPTION in
     1)
