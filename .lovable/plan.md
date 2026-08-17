@@ -10,8 +10,8 @@ Adicionar uma função `detect_installation()` executada antes do menu, que proc
 
 1. Caminhos conhecidos verificados primeiro, nesta ordem: `/opt/bivvo-pagamento` (instalações atuais no servidor), `/opt/project-lovebug-launch`, `/opt/bivvo`.
 2. Além desses, diretórios candidatos em `/opt` e `/var/www` (qualquer pasta que contenha `package.json` + a pasta `new_deploy/`, ou um `.git` cuja `origin` aponte para o repositório antigo ou novo).
-5. Site publicado: existência de `/var/www/bivvo` com `index.html`.
-5. Configuração do Nginx: `/etc/nginx/sites-available/bivvo` (extrai o domínio e o `root` configurado, que revela o `WEB_DIR` real).
+3. Site publicado: existência de `/var/www/bivvo` com `index.html`.
+4. Configuração do Nginx: `/etc/nginx/sites-available/bivvo` (extrai o domínio e o `root` configurado, que revela o `WEB_DIR` real).
 5. Arquivos `.env` com `VITE_SUPABASE_URL` dentro dos diretórios candidatos.
 
 Se encontrar algo, o script assume modo manutenção mesmo que o caminho não seja o padrão.
