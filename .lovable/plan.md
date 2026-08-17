@@ -1,65 +1,38 @@
-# Matriz de Eisenhower na aba de Tarefas
+# Detecção robusta de instalação existente no autoinstalador
 
-## Conceito aplicado ao time
+## Problema
 
-Cada tarefa passa a ter dois atributos independentes:
+O `auto_install.sh` só considera que existe instalação se a pasta `/opt/project-lovebug-launch` existir. Como o repositório mudou de nome, servidores instalados antes ficam com a pasta antiga (ex.: `/opt/bivvo`, `/opt/lovebug-launch`, ou outro nome de clone) e o script mostra "Nenhuma instalação detectada", oferecendo apenas instalação do zero — o que duplica arquivos e perde o `.env`.
 
-- **Importância** (impacta resultado/receita/cliente): sim ou não
-- **Urgência** (prazo curto, bloqueia alguém, risco imediato): sim ou não
+## Solução: varredura de detecção
 
-Isso gera 4 quadrantes:
+Adicionar uma função `detect_installation()` executada antes do menu, que procura instalações por vários sinais:
 
-```text
-                URGENTE            NÃO URGENTE
-IMPORTANTE   Q1 FAZER AGORA      Q2 AGENDAR
-             (crise, SLA)        (estratégico, prevenção)
+1. Diretórios candidatos em `/opt` e `/var/www` (qualquer pasta que contenha `package.json` + a pasta `new_deploy/`, ou um `.git` cuja `origin` aponte para o repositório antigo ou novo).
+2. Site publicado: existência de `/var/www/bivvo` com `index.html`.
+3. Configuração do Nginx: `/etc/nginx/sites-available/bivvo` (extrai o domínio e o `root` configurado, que revela o `WEB_DIR` real).
+4. Arquivos `.env` com `VITE_SUPABASE_URL` dentro dos diretórios candidatos.
 
-NÃO          Q3 DELEGAR          Q4 ELIMINAR
-IMPORTANTE   (interrupções)      (ruído, "quando sobrar")
-```
+Se encontrar algo, o script assume modo manutenção mesmo que o caminho não seja o padrão.
 
-Uso prático combinado ao que já existe hoje:
-- **Q1** → prioridade Alta, prazo definido, dono obrigatório.
-- **Q2** → onde o time deve gastar a maior parte do tempo; exige data agendada.
-- **Q3** → candidata natural ao campo `assigned_to` (delegar) ou ao flag "aguardando terceiro".
-- **Q4** → não entra no Kanban ativo; vira backlog/arquivo.
+## Migração do caminho antigo
 
-Regra operacional sugerida: se um membro tem mais de 3 tarefas em Q1, o time está em modo apagar incêndio — a reunião semanal olha o gráfico de distribuição e puxa esforço para Q2.
+Quando a instalação encontrada estiver em pasta diferente de `/opt/project-lovebug-launch`:
 
-## Mudanças no banco
+- Exibir o que foi encontrado (pasta, domínio, remote git atual).
+- Oferecer: **[1] Migrar** (mover a pasta para o novo caminho, preservar `.env` e `supabase-secrets.env`, atualizar `git remote set-url origin` para o repositório novo, ajustar o `root` do Nginx e recarregar), **[2] Continuar usando o caminho antigo** (apenas atualiza o remote e segue), **[3] Reinstalação completa**.
+- Se a pasta existir mas o remote for o antigo, corrigir o remote automaticamente antes do `git pull` (evita erro de pull).
 
-Nova migration adicionando em `public.tasks`:
-- `is_important boolean not null default true`
-- `is_urgent boolean not null default false`
-- `department text` (financeiro, marketing, comercial, suporte, desenvolvimento, outro)
-- coluna gerada/derivada opcional não é necessária — o quadrante é calculado no front.
+## Ajustes adicionais
 
-Backfill a partir da prioridade atual:
-- `high` → importante + urgente (Q1)
-- `medium` → importante, não urgente (Q2)
-- `low` → não importante, não urgente (Q4)
+- `APP_DIR` e `WEB_DIR` passam a ser variáveis preenchidas pela detecção (com os valores padrão atuais como fallback), em vez de constantes fixas.
+- Novo item no menu de manutenção: **"Diagnóstico da instalação"**, mostrando caminho do app, remote git, commit atual, domínio do Nginx, presença do `.env`, status do build em `WEB_DIR` e status do serviço Nginx.
+- No `git pull`, tratar o caso de repositório com histórico divergente (mensagem clara em vez de falha silenciosa).
+- Atualizar `new_deploy/INSTALL.md` com uma seção sobre migração do caminho antigo para o novo.
 
-O campo `priority` continua existindo (compatibilidade e ordenação), mas passa a ser **derivado automaticamente** do quadrante ao salvar: Q1=alta, Q2=média, Q3=média, Q4=baixa.
+## Arquivos alterados
 
-Mesma migration replicada em `new_deploy/migrations/012_eisenhower_matrix.sql` para o servidor externo.
+- `new_deploy/auto_install.sh`
+- `new_deploy/INSTALL.md`
 
-## Mudanças na interface (`AdminTasks.tsx`)
-
-1. **Formulário de tarefa**: dois switches — "Importante" e "Urgente" — com o quadrante resultante exibido em tempo real ("Q1 · Fazer agora"). Substituem a escolha manual de prioridade. Adição de campo Select para **Departamento**.
-2. **Nova visão "Matriz"**: terceiro botão ao lado de Kanban e Lista, mostrando uma grade 2x2 com as tarefas em cards, contagem por quadrante e cores próprias por quadrante (vermelho/azul/âmbar/cinza, via tokens do design system).
-3. **Arrastar entre quadrantes**: soltar um card em outro quadrante atualiza `is_important`/`is_urgent` (mesmo mecanismo de drag já usado no Kanban).
-4. **Badge de quadrante** nos cards do Kanban e na tabela da Lista, ao lado da prioridade.
-5. **Filtro por quadrante e departamento** na barra de filtros existente, junto de status/prioridade/responsável.
-6. **Ordenação**: dentro de cada coluna do Kanban, ordenar primeiro pela data de vencimento (mais próxima antes, vencidas no topo, sem data por último) e só depois por quadrante (Q1→Q2→Q3→Q4).
-7. **Indicador de carga**: pequeno resumo no topo — quantas tarefas em cada quadrante e alerta visual quando Q1 passa de 3 por responsável.
-
-## Fora de escopo
-
-- Automatizar urgência com base na data de vencimento (pode virar uma segunda etapa).
-- Relatórios históricos de distribuição por quadrante.
-
-## Ordem de execução
-
-1. Migration no Cloud + backfill. (CONCLUÍDO)
-2. Atualizar tipos e `AdminTasks.tsx` (form, matriz, badges, filtro). (EM ANDAMENTO - Departamentos aplicados)
-3. Copiar migration para `new_deploy/migrations/` e atualizar `INSTALL.md`.
+Nenhuma mudança no banco de dados, nas Edge Functions ou no frontend.
