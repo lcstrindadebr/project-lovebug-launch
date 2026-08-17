@@ -20,8 +20,176 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 REPO_URL="https://github.com/lcstrindadebr/project-lovebug-launch.git"
-APP_DIR="/opt/project-lovebug-launch"
-WEB_DIR="/var/www/bivvo"
+DEFAULT_APP_DIR="/opt/project-lovebug-launch"
+DEFAULT_WEB_DIR="/var/www/bivvo"
+APP_DIR="$DEFAULT_APP_DIR"
+WEB_DIR="$DEFAULT_WEB_DIR"
+FOUND_APP_DIR=""
+NGINX_CONF="/etc/nginx/sites-available/bivvo"
+
+# Caminhos conhecidos (ordem de prioridade)
+KNOWN_DIRS=(
+    "/opt/bivvo-pagamento"
+    "/opt/project-lovebug-launch"
+    "/opt/bivvo"
+)
+
+is_install_dir() {
+    local d="$1"
+    [ -d "$d" ] || return 1
+    if [ -f "$d/package.json" ] || [ -d "$d/new_deploy" ] || [ -d "$d/.git" ] || [ -f "$d/.env" ]; then
+        return 0
+    fi
+    return 1
+}
+
+git_remote_of() {
+    local d="$1"
+    [ -d "$d/.git" ] || return 0
+    git -C "$d" remote get-url origin 2>/dev/null || true
+}
+
+nginx_root_dir() {
+    [ -f "$NGINX_CONF" ] || return 0
+    grep -E "^[[:space:]]*root[[:space:]]+" "$NGINX_CONF" | tail -n1 | sed -E 's/^[[:space:]]*root[[:space:]]+//; s/;[[:space:]]*$//' | tr -d '\r'
+}
+
+nginx_domain() {
+    [ -f "$NGINX_CONF" ] || return 0
+    grep -E "^[[:space:]]*server_name[[:space:]]+" "$NGINX_CONF" | head -n1 | sed -E 's/^[[:space:]]*server_name[[:space:]]+//; s/;[[:space:]]*$//' | tr -d '\r'
+}
+
+detect_installation() {
+    FOUND_APP_DIR=""
+
+    # 1) Caminhos conhecidos
+    local d
+    for d in "${KNOWN_DIRS[@]}"; do
+        if is_install_dir "$d"; then
+            FOUND_APP_DIR="$d"
+            break
+        fi
+    done
+
+    # 2) Varredura em /opt e /var/www
+    if [ -z "$FOUND_APP_DIR" ]; then
+        for d in /opt/* /var/www/*; do
+            [ -d "$d" ] || continue
+            if [ -f "$d/package.json" ] && [ -d "$d/new_deploy" ]; then
+                FOUND_APP_DIR="$d"
+                break
+            fi
+            local remote
+            remote=$(git_remote_of "$d")
+            if [[ "$remote" == *"project-lovebug-launch"* || "$remote" == *"bivvo"* ]]; then
+                FOUND_APP_DIR="$d"
+                break
+            fi
+        done
+    fi
+
+    # 3) .env com credenciais Supabase nos candidatos
+    if [ -z "$FOUND_APP_DIR" ]; then
+        for d in /opt/* /var/www/*; do
+            [ -f "$d/.env" ] || continue
+            if grep -q "VITE_SUPABASE_URL" "$d/.env" 2>/dev/null; then
+                FOUND_APP_DIR="$d"
+                break
+            fi
+        done
+    fi
+
+    # 4) WEB_DIR real a partir do Nginx, senão site publicado padrão
+    local root_dir
+    root_dir=$(nginx_root_dir)
+    if [ -n "$root_dir" ] && [ -d "$root_dir" ]; then
+        WEB_DIR="$root_dir"
+    elif [ -f "$DEFAULT_WEB_DIR/index.html" ]; then
+        WEB_DIR="$DEFAULT_WEB_DIR"
+    fi
+
+    if [ -n "$FOUND_APP_DIR" ]; then
+        APP_DIR="$FOUND_APP_DIR"
+        return 0
+    fi
+
+    # Sem pasta de app, mas com site/nginx publicados => instalação parcial
+    if [ -f "$NGINX_CONF" ] || [ -f "$DEFAULT_WEB_DIR/index.html" ]; then
+        return 2
+    fi
+
+    return 1
+}
+
+fix_git_remote() {
+    [ -d "$APP_DIR/.git" ] || return 0
+    local current
+    current=$(git_remote_of "$APP_DIR")
+    if [ -n "$current" ] && [ "$current" != "$REPO_URL" ]; then
+        echo -e "${YELLOW}→ Atualizando remote git: $current → $REPO_URL${NC}"
+        git -C "$APP_DIR" remote set-url origin "$REPO_URL"
+    fi
+}
+
+git_pull_safe() {
+    fix_git_remote
+    if ! git -C "$APP_DIR" pull --ff-only; then
+        echo -e "${RED}❌ git pull falhou (provável histórico divergente após a troca de repositório).${NC}"
+        echo -e "${YELLOW}Opções: rodar 'git -C $APP_DIR fetch origin && git -C $APP_DIR reset --hard origin/main'${NC}"
+        echo -e "${YELLOW}        (isso descarta alterações locais no código, o .env é preservado)${NC}"
+        read -r -p "Deseja fazer o reset agora? (s/N): " RESETC
+        if [[ "$RESETC" =~ ^[Ss]$ ]]; then
+            git -C "$APP_DIR" fetch origin
+            git -C "$APP_DIR" reset --hard origin/main
+        else
+            return 1
+        fi
+    fi
+}
+
+migrate_app_dir() {
+    local target="$DEFAULT_APP_DIR"
+    [ "$APP_DIR" == "$target" ] && return 0
+    if [ -e "$target" ]; then
+        echo -e "${RED}❌ $target já existe. Migração cancelada.${NC}"
+        return 1
+    fi
+    echo -e "${YELLOW}Movendo $APP_DIR → $target ...${NC}"
+    mv "$APP_DIR" "$target"
+    APP_DIR="$target"
+    fix_git_remote
+    if [ -f "$NGINX_CONF" ]; then
+        nginx -t >/dev/null 2>&1 && systemctl reload nginx || true
+    fi
+    echo -e "${GREEN}✓ Instalação migrada para $APP_DIR (.env e secrets preservados)${NC}"
+}
+
+show_diagnostics() {
+    echo ""
+    echo -e "${BLUE}━━━━━ DIAGNÓSTICO DA INSTALAÇÃO ━━━━━${NC}"
+    echo -e "Pasta do app:      ${GREEN}${APP_DIR:-não encontrada}${NC}"
+    echo -e "Pasta web:         ${GREEN}${WEB_DIR}${NC}"
+    echo -e "Remote git:        ${GREEN}$(git_remote_of "$APP_DIR")${NC}"
+    if [ -d "$APP_DIR/.git" ]; then
+        echo -e "Commit atual:      ${GREEN}$(git -C "$APP_DIR" rev-parse --short HEAD 2>/dev/null)${NC}"
+        echo -e "Branch:            ${GREEN}$(git -C "$APP_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null)${NC}"
+    fi
+    echo -e "Domínio (nginx):   ${GREEN}$(nginx_domain)${NC}"
+    if [ -f "$APP_DIR/.env" ]; then
+        echo -e ".env:              ${GREEN}presente${NC} ($(grep -c '=' "$APP_DIR/.env" 2>/dev/null) variáveis)"
+    else
+        echo -e ".env:              ${RED}ausente${NC}"
+    fi
+    if [ -f "$WEB_DIR/index.html" ]; then
+        echo -e "Build publicado:   ${GREEN}sim${NC} ($(date -r "$WEB_DIR/index.html" '+%d/%m/%Y %H:%M' 2>/dev/null))"
+    else
+        echo -e "Build publicado:   ${RED}não${NC}"
+    fi
+    echo -e "Nginx:             ${GREEN}$(systemctl is-active nginx 2>/dev/null)${NC}"
+    echo -e "Node:              ${GREEN}$(node -v 2>/dev/null || echo 'não instalado')${NC}"
+    echo ""
+}
+
 
 # -----------------------------------------------------------------------------
 # Funções de Apoio
