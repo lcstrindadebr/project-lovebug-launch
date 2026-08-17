@@ -672,7 +672,8 @@ case $OPTION in
         echo "1) Trocar Credenciais Supabase"
         echo "2) Trocar Credenciais Asaas"
         echo "3) Trocar Subdomínio"
-        echo "4) Voltar"
+        echo "4) Diagnóstico da instalação"
+        echo "5) Voltar"
         echo ""
         read -p "Escolha: " MOPT
         
