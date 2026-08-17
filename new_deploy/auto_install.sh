@@ -778,7 +778,7 @@ echo ""
 echo -e "${BLUE}━━━━━ ETAPA 4/8: Clonando repositório ━━━━━${NC}"
 if [ -d "$APP_DIR" ]; then
     echo -e "${YELLOW}Diretório já existe, atualizando...${NC}"
-    cd "$APP_DIR" && git pull
+    cd "$APP_DIR" && git_pull_safe
 else
     git clone "$REPO_URL" "$APP_DIR"
 fi
