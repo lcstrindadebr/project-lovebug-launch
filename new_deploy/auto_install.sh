@@ -703,6 +703,10 @@ case $OPTION in
                 config_nginx
                 apply_ssl
                 ;;
+            4)
+                show_diagnostics
+                exit 0
+                ;;
             *) exit 0 ;;
         esac
         
