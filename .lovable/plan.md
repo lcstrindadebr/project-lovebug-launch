@@ -8,7 +8,8 @@ O `auto_install.sh` só considera que existe instalação se a pasta `/opt/proje
 
 Adicionar uma função `detect_installation()` executada antes do menu, que procura instalações por vários sinais:
 
-1. Diretórios candidatos em `/opt` e `/var/www` (qualquer pasta que contenha `package.json` + a pasta `new_deploy/`, ou um `.git` cuja `origin` aponte para o repositório antigo ou novo).
+1. Caminhos conhecidos verificados primeiro, nesta ordem: `/opt/bivvo-pagamento` (instalações atuais no servidor), `/opt/project-lovebug-launch`, `/opt/bivvo`.
+2. Além desses, diretórios candidatos em `/opt` e `/var/www` (qualquer pasta que contenha `package.json` + a pasta `new_deploy/`, ou um `.git` cuja `origin` aponte para o repositório antigo ou novo).
 2. Site publicado: existência de `/var/www/bivvo` com `index.html`.
 3. Configuração do Nginx: `/etc/nginx/sites-available/bivvo` (extrai o domínio e o `root` configurado, que revela o `WEB_DIR` real).
 4. Arquivos `.env` com `VITE_SUPABASE_URL` dentro dos diretórios candidatos.
