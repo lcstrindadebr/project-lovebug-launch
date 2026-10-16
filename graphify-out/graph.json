@@ -1,0 +1,2971 @@
+{
+  "generated_at": "2026-10-16T21:43:10.769472+00:00",
+  "files": [
+    {
+      "path": "tsconfig.app.json",
+      "bytes": 680
+    },
+    {
+      "path": "tailwind.config.ts",
+      "bytes": 3215
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 292844
+    },
+    {
+      "path": "postcss.config.js",
+      "bytes": 81
+    },
+    {
+      "path": "tsconfig.node.json",
+      "bytes": 481
+    },
+    {
+      "path": "BIVVO_DEPLOY_PLAN.md",
+      "bytes": 1179
+    },
+    {
+      "path": "index.html",
+      "bytes": 1401
+    },
+    {
+      "path": "vitest.config.ts",
+      "bytes": 395
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 396
+    },
+    {
+      "path": "vite.config.ts",
+      "bytes": 494
+    },
+    {
+      "path": "eslint.config.js",
+      "bytes": 765
+    },
+    {
+      "path": "README.md",
+      "bytes": 2102
+    },
+    {
+      "path": "package.json",
+      "bytes": 3087
+    },
+    {
+      "path": "components.json",
+      "bytes": 414
+    },
+    {
+      "path": "new_deploy/database_schema.sql",
+      "bytes": 16294
+    },
+    {
+      "path": "new_deploy/create_admin_external.sql",
+      "bytes": 2592
+    },
+    {
+      "path": "new_deploy/INSTALL.md",
+      "bytes": 10254
+    },
+    {
+      "path": "src/vite-env.d.ts",
+      "bytes": 38
+    },
+    {
+      "path": "src/App.css",
+      "bytes": 606
+    },
+    {
+      "path": "src/index.css",
+      "bytes": 3950
+    },
+    {
+      "path": "src/App.tsx",
+      "bytes": 1948
+    },
+    {
+      "path": "src/main.tsx",
+      "bytes": 161
+    },
+    {
+      "path": "supabase/migrations/20260811190643_eec41e93-342f-481a-8bd5-62c1b87ae49b.sql",
+      "bytes": 733
+    },
+    {
+      "path": "supabase/migrations/20260519030026_6b8acc72-d460-4f8d-8797-4b4561c64610.sql",
+      "bytes": 1096
+    },
+    {
+      "path": "supabase/migrations/20260519034135_cc448929-6737-4ff7-881b-aa3df7ceb6e4.sql",
+      "bytes": 1556
+    },
+    {
+      "path": "supabase/migrations/20260512015021_5546480f-101c-433c-bcb8-b330408ffeae.sql",
+      "bytes": 942
+    },
+    {
+      "path": "supabase/migrations/20260803225717_42b9ef46-cf4d-487a-9758-76d3d1230d2c.sql",
+      "bytes": 1990
+    },
+    {
+      "path": "supabase/migrations/20260714042833_e8c65437-983c-4915-af9f-3c938bfacd98.sql",
+      "bytes": 4423
+    },
+    {
+      "path": "supabase/migrations/20260803235201_d696140e-477e-4b6f-907c-140ab8fbc36b.sql",
+      "bytes": 2947
+    },
+    {
+      "path": "supabase/migrations/20260119202057_b26c944e-b799-4dc3-8f58-796bc2834e5f.sql",
+      "bytes": 2010
+    },
+    {
+      "path": "supabase/migrations/20260803232105_3f5b718d-5bd5-4725-a406-78f7f657674d.sql",
+      "bytes": 489
+    },
+    {
+      "path": "supabase/migrations/20260803224134_a84593f3-92fe-449b-8c17-5e37d7d2dcce.sql",
+      "bytes": 134
+    },
+    {
+      "path": "supabase/migrations/20260521232520_c58cfaf2-f428-443b-b7e7-609a5e5a6329.sql",
+      "bytes": 770
+    },
+    {
+      "path": "supabase/migrations/20260716033728_44c4f4b2-f0f6-46cf-aa4f-2970ae09ad9d.sql",
+      "bytes": 678
+    },
+    {
+      "path": "supabase/migrations/20260512025045_7492d944-22f8-4e49-804f-6e3f1b8876e1.sql",
+      "bytes": 2055
+    },
+    {
+      "path": "supabase/migrations/20260716061432_36f938ca-5488-4ff3-86f8-156765dca818.sql",
+      "bytes": 524
+    },
+    {
+      "path": "supabase/migrations/20260714044139_77e2a0fd-9f64-492f-97e2-493230f852ee.sql",
+      "bytes": 517
+    },
+    {
+      "path": "supabase/migrations/20260717005807_19f19851-0f88-4899-9d71-df566b108569.sql",
+      "bytes": 1625
+    },
+    {
+      "path": "supabase/migrations/20260715034021_354ed4a0-5362-4bfa-85fb-aa6078882b59.sql",
+      "bytes": 870
+    },
+    {
+      "path": "supabase/migrations/20260520040117_a6a3f516-4178-46c3-91bb-29dacd4bbc0f.sql",
+      "bytes": 818
+    },
+    {
+      "path": "supabase/migrations/20260519030359_78fbd3de-8aab-4b8d-b785-60d095e97604.sql",
+      "bytes": 2187
+    },
+    {
+      "path": "supabase/migrations/20260512010004_bb354010-cf80-4e71-97db-7b84a9361b28.sql",
+      "bytes": 137
+    },
+    {
+      "path": "supabase/migrations/20260512010717_46f84707-51d5-49dc-9320-7289a5b38924.sql",
+      "bytes": 1047
+    },
+    {
+      "path": "supabase/migrations/20260521233346_b003e9a5-61d5-4640-aeda-c8be98b81be9.sql",
+      "bytes": 1630
+    },
+    {
+      "path": "supabase/migrations/20260716032725_00298f1d-eb96-4464-988c-bbc1c0185440.sql",
+      "bytes": 209
+    },
+    {
+      "path": "supabase/migrations/20260603022516_60fde651-ec7a-43ce-9084-e52748c97361.sql",
+      "bytes": 1195
+    },
+    {
+      "path": "supabase/migrations/20260512010237_35b23d3f-ca64-46dd-953c-615fc05dd3eb.sql",
+      "bytes": 552
+    },
+    {
+      "path": "supabase/migrations/20260716074146_9003d38d-130a-401a-8e6e-b8811570e687.sql",
+      "bytes": 76
+    },
+    {
+      "path": "supabase/migrations/20260215230530_2a664376-0a54-4632-b7c6-10b3254d8653.sql",
+      "bytes": 254
+    },
+    {
+      "path": "supabase/migrations/20260519044733_6d5d52be-6057-4bfb-8cb0-ea384b7afcc5.sql",
+      "bytes": 1186
+    },
+    {
+      "path": "supabase/migrations/20260713174941_69608aac-1130-47ab-9654-2ec03c887c80.sql",
+      "bytes": 112
+    },
+    {
+      "path": "supabase/migrations/20260803230529_fead036e-5ecc-4c4e-83e7-fb6f15a8041d.sql",
+      "bytes": 2319
+    },
+    {
+      "path": "supabase/migrations/20260803220147_ea5bc6f1-659c-4787-b383-e752dc948668.sql",
+      "bytes": 16313
+    },
+    {
+      "path": "supabase/migrations/20260803220947_3a0a0b83-2ddf-4093-af76-b62aec97f53a.sql",
+      "bytes": 173
+    },
+    {
+      "path": "supabase/migrations/20260717015528_6e48e140-10a7-47cf-a7ab-5add270ba902.sql",
+      "bytes": 204
+    },
+    {
+      "path": "supabase/migrations/20260803230242_71873330-6c54-4cf1-bf02-79dc527c427a.sql",
+      "bytes": 1330
+    },
+    {
+      "path": "supabase/migrations/20260511220732_12cfd55f-07ed-40b7-836d-d391de729c64.sql",
+      "bytes": 6591
+    },
+    {
+      "path": "supabase/migrations/20260716070047_0f322e05-4892-4773-863e-bf2c8fff4d6d.sql",
+      "bytes": 975
+    },
+    {
+      "path": "supabase/migrations/20260121021941_2945269f-3c28-4349-b490-285181f016b4.sql",
+      "bytes": 1240
+    },
+    {
+      "path": "supabase/migrations/20260521232942_7a51be13-4c39-4f1f-af02-1f5a03806030.sql",
+      "bytes": 535
+    },
+    {
+      "path": "supabase/migrations/20260512014514_b00c70bc-3f05-40a4-883c-4f0fc91c0eb5.sql",
+      "bytes": 1087
+    },
+    {
+      "path": "supabase/migrations/20260803220228_54c21e3e-e4fc-4df9-bb30-14ebba1e9854.sql",
+      "bytes": 8078
+    },
+    {
+      "path": "supabase/migrations/20260512010650_72b4bc9e-c204-4ee8-8c06-0921e7c4fd09.sql",
+      "bytes": 534
+    },
+    {
+      "path": "supabase/migrations/20260512005707_fe7ab6dc-01ab-4a95-9fd7-0d44e381e30d.sql",
+      "bytes": 1090
+    },
+    {
+      "path": "supabase/migrations/20260716041453_b561638f-feb0-4058-9cf8-5d35e32fc804.sql",
+      "bytes": 134
+    },
+    {
+      "path": "supabase/migrations/20260215230518_f8f2e88e-c451-4ca5-8366-fb826e3666e6.sql",
+      "bytes": 5077
+    },
+    {
+      "path": "supabase/migrations/20260803230301_da4d578e-b90d-48eb-8955-32ccbeee74a3.sql",
+      "bytes": 838
+    },
+    {
+      "path": "supabase/migrations/20260803220903_c20994ff-0c12-4998-9ca0-50677c695ead.sql",
+      "bytes": 2045
+    },
+    {
+      "path": "supabase/migrations/20260519034714_6e4b25ec-8203-41fc-b45e-a47232d4f645.sql",
+      "bytes": 2184
+    },
+    {
+      "path": "supabase/migrations/20260803220246_900f68b2-e0cb-4f4c-9262-8062f0d07900.sql",
+      "bytes": 143
+    },
+    {
+      "path": "supabase/migrations/20260519033453_6b1df825-aaf9-474c-b20c-c6a5883cc12d.sql",
+      "bytes": 4976
+    },
+    {
+      "path": "supabase/migrations/20260519031115_1572104b-bd4f-458f-8ea6-d9b57b0cdfb1.sql",
+      "bytes": 566
+    },
+    {
+      "path": "supabase/migrations/20260519043845_e163f248-6206-4926-80bd-d995193ccd3f.sql",
+      "bytes": 247
+    },
+    {
+      "path": "supabase/migrations/20260803225735_32516f6e-b6a1-4c5e-be54-38aa9000d5a1.sql",
+      "bytes": 1439
+    },
+    {
+      "path": "supabase/functions/create-subscription/index.ts",
+      "bytes": 47924
+    },
+    {
+      "path": "supabase/functions/auto-inactivate-overdue/index.ts",
+      "bytes": 29015
+    },
+    {
+      "path": "supabase/functions/check-payment-status/index.ts",
+      "bytes": 3399
+    },
+    {
+      "path": "supabase/functions/provision-bivvo-tenant/index.ts",
+      "bytes": 28305
+    },
+    {
+      "path": "supabase/functions/admin-api/index.ts",
+      "bytes": 68861
+    },
+    {
+      "path": "supabase/functions/process-payment/index.ts",
+      "bytes": 48720
+    },
+    {
+      "path": "supabase/functions/affiliate-api/index.ts",
+      "bytes": 6040
+    },
+    {
+      "path": "supabase/functions/validate-coupon/index.ts",
+      "bytes": 2950
+    },
+    {
+      "path": "supabase/functions/_shared/bivvo-logic.ts",
+      "bytes": 5971
+    },
+    {
+      "path": "supabase/functions/_shared/logger.ts",
+      "bytes": 2035
+    },
+    {
+      "path": "supabase/functions/_shared/bivvo-api.ts",
+      "bytes": 24481
+    },
+    {
+      "path": "supabase/functions/_shared/coupon.ts",
+      "bytes": 2028
+    },
+    {
+      "path": "supabase/functions/_shared/asaas.ts",
+      "bytes": 518
+    },
+    {
+      "path": "supabase/functions/_shared/cors.ts",
+      "bytes": 178
+    },
+    {
+      "path": "supabase/functions/asaas-webhook/index.ts",
+      "bytes": 32073
+    },
+    {
+      "path": ".lovable/plan/detecção-robusta-de-instalação-existente-no-autoinstalador-2026-08-17.md",
+      "bytes": 2790
+    },
+    {
+      "path": "new_deploy/migrations/010_security_hardening_and_channels.sql",
+      "bytes": 37120
+    },
+    {
+      "path": "new_deploy/migrations/004_security_and_settings.sql",
+      "bytes": 6033
+    },
+    {
+      "path": "new_deploy/migrations/008_missing_admin_and_finance.sql",
+      "bytes": 8197
+    },
+    {
+      "path": "new_deploy/migrations/009_bivvo_api_token.sql",
+      "bytes": 1706
+    },
+    {
+      "path": "new_deploy/migrations/012_eisenhower_matrix.sql",
+      "bytes": 855
+    },
+    {
+      "path": "new_deploy/migrations/011_unified_security_policy.sql",
+      "bytes": 2947
+    },
+    {
+      "path": "new_deploy/migrations/007_bivvo_tenant_and_logs.sql",
+      "bytes": 3865
+    },
+    {
+      "path": "new_deploy/migrations/006_finance_metrics.sql",
+      "bytes": 668
+    },
+    {
+      "path": "new_deploy/migrations/003_new_features.sql",
+      "bytes": 4725
+    },
+    {
+      "path": "new_deploy/migrations/005_task_enhancements.sql",
+      "bytes": 1249
+    },
+    {
+      "path": "new_deploy/functions/create-subscription/index.ts",
+      "bytes": 47924
+    },
+    {
+      "path": "new_deploy/functions/auto-inactivate-overdue/index.ts",
+      "bytes": 29015
+    },
+    {
+      "path": "new_deploy/functions/check-payment-status/index.ts",
+      "bytes": 3399
+    },
+    {
+      "path": "new_deploy/functions/provision-bivvo-tenant/index.ts",
+      "bytes": 28305
+    },
+    {
+      "path": "new_deploy/functions/admin-api/index.ts",
+      "bytes": 68861
+    },
+    {
+      "path": "new_deploy/functions/process-payment/index.ts",
+      "bytes": 48720
+    },
+    {
+      "path": "new_deploy/functions/affiliate-api/index.ts",
+      "bytes": 6040
+    },
+    {
+      "path": "new_deploy/functions/validate-coupon/index.ts",
+      "bytes": 2950
+    },
+    {
+      "path": "new_deploy/functions/asaas-webhook/index.ts",
+      "bytes": 32073
+    },
+    {
+      "path": "src/components/ProtectedRoute.tsx",
+      "bytes": 1743
+    },
+    {
+      "path": "src/components/NavLink.tsx",
+      "bytes": 751
+    },
+    {
+      "path": "src/lib/validators.ts",
+      "bytes": 4344
+    },
+    {
+      "path": "src/lib/bivvo-calc.ts",
+      "bytes": 7075
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "bytes": 169
+    },
+    {
+      "path": "src/hooks/use-toast.ts",
+      "bytes": 3935
+    },
+    {
+      "path": "src/hooks/useSaveSetting.ts",
+      "bytes": 2119
+    },
+    {
+      "path": "src/hooks/useSiteSettings.ts",
+      "bytes": 863
+    },
+    {
+      "path": "src/hooks/usePayment.ts",
+      "bytes": 5569
+    },
+    {
+      "path": "src/hooks/useAdmin.ts",
+      "bytes": 3178
+    },
+    {
+      "path": "src/hooks/useViaCep.ts",
+      "bytes": 1023
+    },
+    {
+      "path": "src/hooks/use-mobile.tsx",
+      "bytes": 576
+    },
+    {
+      "path": "src/pages/Admin.tsx",
+      "bytes": 120918
+    },
+    {
+      "path": "src/pages/AffiliateLogin.tsx",
+      "bytes": 6117
+    },
+    {
+      "path": "src/pages/AdminLogin.tsx",
+      "bytes": 4935
+    },
+    {
+      "path": "src/pages/Affiliate.tsx",
+      "bytes": 19307
+    },
+    {
+      "path": "src/pages/NotFound.tsx",
+      "bytes": 727
+    },
+    {
+      "path": "src/pages/PrivacyPolicy.tsx",
+      "bytes": 35100
+    },
+    {
+      "path": "src/pages/Index.tsx",
+      "bytes": 3460
+    },
+    {
+      "path": "src/pages/Checkout.tsx",
+      "bytes": 51701
+    },
+    {
+      "path": "src/pages/TermsOfUse.tsx",
+      "bytes": 46174
+    },
+    {
+      "path": "src/test/example.test.ts",
+      "bytes": 143
+    },
+    {
+      "path": "src/test/setup.ts",
+      "bytes": 353
+    },
+    {
+      "path": "src/integrations/supabase/types.ts",
+      "bytes": 37831
+    },
+    {
+      "path": "src/integrations/supabase/client.ts",
+      "bytes": 1503
+    },
+    {
+      "path": "src/components/checkout/BoletoPayment.tsx",
+      "bytes": 4090
+    },
+    {
+      "path": "src/components/checkout/PaymentMethodSelector.tsx",
+      "bytes": 2780
+    },
+    {
+      "path": "src/components/checkout/TrustBadges.tsx",
+      "bytes": 1989
+    },
+    {
+      "path": "src/components/checkout/CardBrands.tsx",
+      "bytes": 3746
+    },
+    {
+      "path": "src/components/checkout/SecurityFooter.tsx",
+      "bytes": 1425
+    },
+    {
+      "path": "src/components/checkout/PixPayment.tsx",
+      "bytes": 4417
+    },
+    {
+      "path": "src/components/ui/dropdown-menu.tsx",
+      "bytes": 7260
+    },
+    {
+      "path": "src/components/ui/toast.tsx",
+      "bytes": 4798
+    },
+    {
+      "path": "src/components/ui/input-otp.tsx",
+      "bytes": 2166
+    },
+    {
+      "path": "src/components/ui/command.tsx",
+      "bytes": 4821
+    },
+    {
+      "path": "src/components/ui/use-toast.ts",
+      "bytes": 82
+    },
+    {
+      "path": "src/components/ui/context-menu.tsx",
+      "bytes": 7191
+    },
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "bytes": 1053
+    },
+    {
+      "path": "src/components/ui/resizable.tsx",
+      "bytes": 1696
+    },
+    {
+      "path": "src/components/ui/separator.tsx",
+      "bytes": 698
+    },
+    {
+      "path": "src/components/ui/table.tsx",
+      "bytes": 2694
+    },
+    {
+      "path": "src/components/ui/textarea.tsx",
+      "bytes": 751
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "bytes": 1840
+    },
+    {
+      "path": "src/components/ui/pagination.tsx",
+      "bytes": 2683
+    },
+    {
+      "path": "src/components/ui/calendar.tsx",
+      "bytes": 2563
+    },
+    {
+      "path": "src/components/ui/toggle.tsx",
+      "bytes": 1416
+    },
+    {
+      "path": "src/components/ui/alert.tsx",
+      "bytes": 1546
+    },
+    {
+      "path": "src/components/ui/sidebar.tsx",
+      "bytes": 22837
+    },
+    {
+      "path": "src/components/ui/toggle-group.tsx",
+      "bytes": 1714
+    },
+    {
+      "path": "src/components/ui/sonner.tsx",
+      "bytes": 877
+    },
+    {
+      "path": "src/components/ui/select.tsx",
+      "bytes": 5575
+    },
+    {
+      "path": "src/components/ui/switch.tsx",
+      "bytes": 1147
+    },
+    {
+      "path": "src/components/ui/navigation-menu.tsx",
+      "bytes": 5030
+    },
+    {
+      "path": "src/components/ui/collapsible.tsx",
+      "bytes": 320
+    },
+    {
+      "path": "src/components/ui/popover.tsx",
+      "bytes": 1239
+    },
+    {
+      "path": "src/components/ui/slider.tsx",
+      "bytes": 1065
+    },
+    {
+      "path": "src/components/ui/sheet.tsx",
+      "bytes": 4197
+    },
+    {
+      "path": "src/components/ui/label.tsx",
+      "bytes": 696
+    },
+    {
+      "path": "src/components/ui/card.tsx",
+      "bytes": 1785
+    },
+    {
+      "path": "src/components/ui/avatar.tsx",
+      "bytes": 1365
+    },
+    {
+      "path": "src/components/ui/breadcrumb.tsx",
+      "bytes": 2687
+    },
+    {
+      "path": "src/components/ui/toaster.tsx",
+      "bytes": 730
+    },
+    {
+      "path": "src/components/ui/aspect-ratio.tsx",
+      "bytes": 143
+    },
+    {
+      "path": "src/components/ui/menubar.tsx",
+      "bytes": 7863
+    },
+    {
+      "path": "src/components/ui/hover-card.tsx",
+      "bytes": 1193
+    },
+    {
+      "path": "src/components/ui/chart.tsx",
+      "bytes": 9987
+    },
+    {
+      "path": "src/components/ui/carousel.tsx",
+      "bytes": 6249
+    },
+    {
+      "path": "src/components/ui/badge.tsx",
+      "bytes": 1089
+    },
+    {
+      "path": "src/components/ui/form.tsx",
+      "bytes": 4014
+    },
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "bytes": 234
+    },
+    {
+      "path": "src/components/ui/drawer.tsx",
+      "bytes": 2941
+    },
+    {
+      "path": "src/components/ui/radio-group.tsx",
+      "bytes": 1447
+    },
+    {
+      "path": "src/components/ui/progress.tsx",
+      "bytes": 765
+    },
+    {
+      "path": "src/components/ui/input.tsx",
+      "bytes": 799
+    },
+    {
+      "path": "src/components/ui/dialog.tsx",
+      "bytes": 3761
+    },
+    {
+      "path": "src/components/ui/alert-dialog.tsx",
+      "bytes": 4313
+    },
+    {
+      "path": "src/components/ui/accordion.tsx",
+      "bytes": 1976
+    },
+    {
+      "path": "src/components/ui/tooltip.tsx",
+      "bytes": 1155
+    },
+    {
+      "path": "src/components/ui/tabs.tsx",
+      "bytes": 1897
+    },
+    {
+      "path": "src/components/ui/scroll-area.tsx",
+      "bytes": 1608
+    },
+    {
+      "path": "src/components/admin/AdminAffiliates.tsx",
+      "bytes": 21335
+    },
+    {
+      "path": "src/components/admin/AdminFinanceDashboard.tsx",
+      "bytes": 24015
+    },
+    {
+      "path": "src/components/admin/AdminExpenses.tsx",
+      "bytes": 17366
+    },
+    {
+      "path": "src/components/admin/AdminOfficialTemplates.tsx",
+      "bytes": 13794
+    },
+    {
+      "path": "src/components/admin/AdminSettings.tsx",
+      "bytes": 2220
+    },
+    {
+      "path": "src/components/admin/AdminTasks.tsx",
+      "bytes": 37547
+    },
+    {
+      "path": "src/components/admin/AdminMarketingMaterials.tsx",
+      "bytes": 11629
+    },
+    {
+      "path": "src/components/affiliate/MarketingTools.tsx",
+      "bytes": 4360
+    },
+    {
+      "path": "src/components/affiliate/BivvoCalculator.tsx",
+      "bytes": 27201
+    },
+    {
+      "path": "src/components/admin/settings/GeneralTab.tsx",
+      "bytes": 5347
+    },
+    {
+      "path": "src/components/admin/settings/IntegrationsTab.tsx",
+      "bytes": 8326
+    },
+    {
+      "path": "src/components/admin/settings/BrandingTab.tsx",
+      "bytes": 7398
+    },
+    {
+      "path": "src/components/admin/settings/LogsTab.tsx",
+      "bytes": 7757
+    },
+    {
+      "path": "src/components/admin/settings/NotificationsTab.tsx",
+      "bytes": 3905
+    }
+  ],
+  "dependencies": [
+    {
+      "source": "tailwind.config.ts",
+      "target": "tailwindcss"
+    },
+    {
+      "source": "tailwind.config.ts",
+      "target": "tailwindcss-animate"
+    },
+    {
+      "source": "vitest.config.ts",
+      "target": "vitest/config"
+    },
+    {
+      "source": "vitest.config.ts",
+      "target": "@vitejs/plugin-react-swc"
+    },
+    {
+      "source": "vitest.config.ts",
+      "target": "path"
+    },
+    {
+      "source": "vite.config.ts",
+      "target": "vite"
+    },
+    {
+      "source": "vite.config.ts",
+      "target": "@vitejs/plugin-react-swc"
+    },
+    {
+      "source": "vite.config.ts",
+      "target": "path"
+    },
+    {
+      "source": "vite.config.ts",
+      "target": "lovable-tagger"
+    },
+    {
+      "source": "eslint.config.js",
+      "target": "@eslint/js"
+    },
+    {
+      "source": "eslint.config.js",
+      "target": "globals"
+    },
+    {
+      "source": "eslint.config.js",
+      "target": "eslint-plugin-react-hooks"
+    },
+    {
+      "source": "eslint.config.js",
+      "target": "eslint-plugin-react-refresh"
+    },
+    {
+      "source": "eslint.config.js",
+      "target": "typescript-eslint"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "@/components/ui/toaster"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "@/components/ui/sonner"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "@/components/ui/tooltip"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "@tanstack/react-query"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./components/ProtectedRoute"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/Index"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/Checkout"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/NotFound"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/AdminLogin"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/Admin"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/AffiliateLogin"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/Affiliate"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/PrivacyPolicy"
+    },
+    {
+      "source": "src/App.tsx",
+      "target": "./pages/TermsOfUse"
+    },
+    {
+      "source": "src/main.tsx",
+      "target": "react-dom/client"
+    },
+    {
+      "source": "src/main.tsx",
+      "target": "./App.tsx"
+    },
+    {
+      "source": "supabase/functions/create-subscription/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/create-subscription/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/create-subscription/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/auto-inactivate-overdue/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/auto-inactivate-overdue/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/auto-inactivate-overdue/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/check-payment-status/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/check-payment-status/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/provision-bivvo-tenant/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/provision-bivvo-tenant/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/provision-bivvo-tenant/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/admin-api/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/admin-api/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/process-payment/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/process-payment/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/process-payment/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/affiliate-api/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/affiliate-api/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/validate-coupon/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/validate-coupon/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/_shared/logger.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/_shared/bivvo-api.ts",
+      "target": "./logger.ts"
+    },
+    {
+      "source": "supabase/functions/asaas-webhook/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "supabase/functions/asaas-webhook/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "supabase/functions/asaas-webhook/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/migrations/005_task_enhancements.sql",
+      "target": "done"
+    },
+    {
+      "source": "new_deploy/functions/create-subscription/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/create-subscription/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/create-subscription/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/auto-inactivate-overdue/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/auto-inactivate-overdue/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/auto-inactivate-overdue/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/check-payment-status/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/check-payment-status/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/provision-bivvo-tenant/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/provision-bivvo-tenant/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/provision-bivvo-tenant/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/admin-api/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/admin-api/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/process-payment/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/process-payment/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/process-payment/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/affiliate-api/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/affiliate-api/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/validate-coupon/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/validate-coupon/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/asaas-webhook/index.ts",
+      "target": "https://deno.land/std@0.168.0/http/server.ts"
+    },
+    {
+      "source": "new_deploy/functions/asaas-webhook/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "new_deploy/functions/asaas-webhook/index.ts",
+      "target": "https://esm.sh/@supabase/supabase-js@2"
+    },
+    {
+      "source": "src/components/ProtectedRoute.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ProtectedRoute.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/components/ProtectedRoute.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/ProtectedRoute.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/NavLink.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/components/NavLink.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/NavLink.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/lib/bivvo-calc.ts",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/lib/utils.ts",
+      "target": "clsx"
+    },
+    {
+      "source": "src/lib/utils.ts",
+      "target": "tailwind-merge"
+    },
+    {
+      "source": "src/hooks/use-toast.ts",
+      "target": "react"
+    },
+    {
+      "source": "src/hooks/use-toast.ts",
+      "target": "@/components/ui/toast"
+    },
+    {
+      "source": "src/hooks/useSaveSetting.ts",
+      "target": "react"
+    },
+    {
+      "source": "src/hooks/useSaveSetting.ts",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/hooks/useSaveSetting.ts",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/hooks/useSaveSetting.ts",
+      "target": "@tanstack/react-query"
+    },
+    {
+      "source": "src/hooks/useSiteSettings.ts",
+      "target": "@tanstack/react-query"
+    },
+    {
+      "source": "src/hooks/useSiteSettings.ts",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/hooks/usePayment.ts",
+      "target": "react"
+    },
+    {
+      "source": "src/hooks/usePayment.ts",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/hooks/useAdmin.ts",
+      "target": "react"
+    },
+    {
+      "source": "src/hooks/useAdmin.ts",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/hooks/useAdmin.ts",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/hooks/useViaCep.ts",
+      "target": "react"
+    },
+    {
+      "source": "src/hooks/use-mobile.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/hooks/useAdmin"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/tabs"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/switch"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/ui/alert-dialog"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminAffiliates"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminFinanceDashboard"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminExpenses"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminMarketingMaterials"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminSettings"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminTasks"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/components/admin/AdminOfficialTemplates"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/hooks/useSiteSettings"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/hooks/useSaveSetting"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/assets/bivvo-logo.png"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/lib/validators"
+    },
+    {
+      "source": "src/pages/Admin.tsx",
+      "target": "@/lib/bivvo-calc"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/AffiliateLogin.tsx",
+      "target": "@/assets/bivvo-logo.png"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/AdminLogin.tsx",
+      "target": "@/assets/bivvo-logo.png"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/tabs"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/affiliate/BivvoCalculator"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/components/affiliate/MarketingTools"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/lib/validators"
+    },
+    {
+      "source": "src/pages/Affiliate.tsx",
+      "target": "@/lib/bivvo-calc"
+    },
+    {
+      "source": "src/pages/NotFound.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/NotFound.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/PrivacyPolicy.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/PrivacyPolicy.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/PrivacyPolicy.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/PrivacyPolicy.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "@/assets/bivvo-logo.png"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "@/components/affiliate/BivvoCalculator"
+    },
+    {
+      "source": "src/pages/Index.tsx",
+      "target": "@/lib/bivvo-calc"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/hooks/useViaCep"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/hooks/usePayment"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/checkout/TrustBadges"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/checkout/CardBrands"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/checkout/SecurityFooter"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/checkout/PaymentMethodSelector"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/checkout/PixPayment"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/components/checkout/BoletoPayment"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/assets/bivvo-logo.png"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/lib/validators"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/lib/bivvo-calc"
+    },
+    {
+      "source": "src/pages/Checkout.tsx",
+      "target": "@/hooks/useSiteSettings"
+    },
+    {
+      "source": "src/pages/TermsOfUse.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/pages/TermsOfUse.tsx",
+      "target": "react-router-dom"
+    },
+    {
+      "source": "src/pages/TermsOfUse.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/pages/TermsOfUse.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/test/example.test.ts",
+      "target": "vitest"
+    },
+    {
+      "source": "src/integrations/supabase/client.ts",
+      "target": "@supabase/supabase-js"
+    },
+    {
+      "source": "src/integrations/supabase/client.ts",
+      "target": "./types"
+    },
+    {
+      "source": "src/integrations/supabase/client.ts",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/checkout/BoletoPayment.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/checkout/BoletoPayment.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/checkout/BoletoPayment.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/checkout/BoletoPayment.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/checkout/PaymentMethodSelector.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/checkout/TrustBadges.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/checkout/SecurityFooter.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/checkout/PixPayment.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/checkout/PixPayment.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/checkout/PixPayment.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/checkout/PixPayment.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/ui/dropdown-menu.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/dropdown-menu.tsx",
+      "target": "@radix-ui/react-dropdown-menu"
+    },
+    {
+      "source": "src/components/ui/dropdown-menu.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/dropdown-menu.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/toast.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/toast.tsx",
+      "target": "@radix-ui/react-toast"
+    },
+    {
+      "source": "src/components/ui/toast.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/toast.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/toast.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/input-otp.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/input-otp.tsx",
+      "target": "input-otp"
+    },
+    {
+      "source": "src/components/ui/input-otp.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/input-otp.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/command.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/command.tsx",
+      "target": "@radix-ui/react-dialog"
+    },
+    {
+      "source": "src/components/ui/command.tsx",
+      "target": "cmdk"
+    },
+    {
+      "source": "src/components/ui/command.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/command.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/command.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/components/ui/use-toast.ts",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/ui/context-menu.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/context-menu.tsx",
+      "target": "@radix-ui/react-context-menu"
+    },
+    {
+      "source": "src/components/ui/context-menu.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/context-menu.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/checkbox.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/checkbox.tsx",
+      "target": "@radix-ui/react-checkbox"
+    },
+    {
+      "source": "src/components/ui/checkbox.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/checkbox.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/resizable.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/resizable.tsx",
+      "target": "react-resizable-panels"
+    },
+    {
+      "source": "src/components/ui/resizable.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/separator.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/separator.tsx",
+      "target": "@radix-ui/react-separator"
+    },
+    {
+      "source": "src/components/ui/separator.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/table.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/table.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/textarea.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/textarea.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/button.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/button.tsx",
+      "target": "@radix-ui/react-slot"
+    },
+    {
+      "source": "src/components/ui/button.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/button.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/pagination.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/pagination.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/pagination.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/pagination.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/ui/calendar.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/calendar.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/calendar.tsx",
+      "target": "react-day-picker"
+    },
+    {
+      "source": "src/components/ui/calendar.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/calendar.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/ui/toggle.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/toggle.tsx",
+      "target": "@radix-ui/react-toggle"
+    },
+    {
+      "source": "src/components/ui/toggle.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/toggle.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/alert.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/alert.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/alert.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@radix-ui/react-slot"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/hooks/use-mobile"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/components/ui/separator"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/components/ui/sheet"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/components/ui/skeleton"
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx",
+      "target": "@/components/ui/tooltip"
+    },
+    {
+      "source": "src/components/ui/toggle-group.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/toggle-group.tsx",
+      "target": "@radix-ui/react-toggle-group"
+    },
+    {
+      "source": "src/components/ui/toggle-group.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/toggle-group.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/toggle-group.tsx",
+      "target": "@/components/ui/toggle"
+    },
+    {
+      "source": "src/components/ui/sonner.tsx",
+      "target": "next-themes"
+    },
+    {
+      "source": "src/components/ui/sonner.tsx",
+      "target": "sonner"
+    },
+    {
+      "source": "src/components/ui/select.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/select.tsx",
+      "target": "@radix-ui/react-select"
+    },
+    {
+      "source": "src/components/ui/select.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/select.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/switch.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/switch.tsx",
+      "target": "@radix-ui/react-switch"
+    },
+    {
+      "source": "src/components/ui/switch.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/navigation-menu.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/navigation-menu.tsx",
+      "target": "@radix-ui/react-navigation-menu"
+    },
+    {
+      "source": "src/components/ui/navigation-menu.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/navigation-menu.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/navigation-menu.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/collapsible.tsx",
+      "target": "@radix-ui/react-collapsible"
+    },
+    {
+      "source": "src/components/ui/popover.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/popover.tsx",
+      "target": "@radix-ui/react-popover"
+    },
+    {
+      "source": "src/components/ui/popover.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/slider.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/slider.tsx",
+      "target": "@radix-ui/react-slider"
+    },
+    {
+      "source": "src/components/ui/slider.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/sheet.tsx",
+      "target": "@radix-ui/react-dialog"
+    },
+    {
+      "source": "src/components/ui/sheet.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/sheet.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/sheet.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/sheet.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/label.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/label.tsx",
+      "target": "@radix-ui/react-label"
+    },
+    {
+      "source": "src/components/ui/label.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/label.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/card.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/card.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/avatar.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/avatar.tsx",
+      "target": "@radix-ui/react-avatar"
+    },
+    {
+      "source": "src/components/ui/avatar.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/breadcrumb.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/breadcrumb.tsx",
+      "target": "@radix-ui/react-slot"
+    },
+    {
+      "source": "src/components/ui/breadcrumb.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/breadcrumb.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/toaster.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/ui/toaster.tsx",
+      "target": "@/components/ui/toast"
+    },
+    {
+      "source": "src/components/ui/aspect-ratio.tsx",
+      "target": "@radix-ui/react-aspect-ratio"
+    },
+    {
+      "source": "src/components/ui/menubar.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/menubar.tsx",
+      "target": "@radix-ui/react-menubar"
+    },
+    {
+      "source": "src/components/ui/menubar.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/menubar.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/hover-card.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/hover-card.tsx",
+      "target": "@radix-ui/react-hover-card"
+    },
+    {
+      "source": "src/components/ui/hover-card.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/chart.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/chart.tsx",
+      "target": "recharts"
+    },
+    {
+      "source": "src/components/ui/chart.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/carousel.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/carousel.tsx",
+      "target": "embla-carousel-react"
+    },
+    {
+      "source": "src/components/ui/carousel.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/carousel.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/carousel.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/ui/badge.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/badge.tsx",
+      "target": "class-variance-authority"
+    },
+    {
+      "source": "src/components/ui/badge.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/form.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/form.tsx",
+      "target": "@radix-ui/react-label"
+    },
+    {
+      "source": "src/components/ui/form.tsx",
+      "target": "@radix-ui/react-slot"
+    },
+    {
+      "source": "src/components/ui/form.tsx",
+      "target": "react-hook-form"
+    },
+    {
+      "source": "src/components/ui/form.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/form.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/ui/skeleton.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/drawer.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/drawer.tsx",
+      "target": "vaul"
+    },
+    {
+      "source": "src/components/ui/drawer.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/radio-group.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/radio-group.tsx",
+      "target": "@radix-ui/react-radio-group"
+    },
+    {
+      "source": "src/components/ui/radio-group.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/radio-group.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/progress.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/progress.tsx",
+      "target": "@radix-ui/react-progress"
+    },
+    {
+      "source": "src/components/ui/progress.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/input.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/input.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/dialog.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/dialog.tsx",
+      "target": "@radix-ui/react-dialog"
+    },
+    {
+      "source": "src/components/ui/dialog.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/dialog.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/alert-dialog.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/alert-dialog.tsx",
+      "target": "@radix-ui/react-alert-dialog"
+    },
+    {
+      "source": "src/components/ui/alert-dialog.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/alert-dialog.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/ui/accordion.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/accordion.tsx",
+      "target": "@radix-ui/react-accordion"
+    },
+    {
+      "source": "src/components/ui/accordion.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/ui/accordion.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/tooltip.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/tooltip.tsx",
+      "target": "@radix-ui/react-tooltip"
+    },
+    {
+      "source": "src/components/ui/tooltip.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/tabs.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/tabs.tsx",
+      "target": "@radix-ui/react-tabs"
+    },
+    {
+      "source": "src/components/ui/tabs.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/ui/scroll-area.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/ui/scroll-area.tsx",
+      "target": "@radix-ui/react-scroll-area"
+    },
+    {
+      "source": "src/components/ui/scroll-area.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/switch"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/components/ui/tabs"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/hooks/useAdmin"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/lib/validators"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/admin/AdminAffiliates.tsx",
+      "target": "@/hooks/useSiteSettings"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "@/lib/validators"
+    },
+    {
+      "source": "src/components/admin/AdminFinanceDashboard.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/components/ui/select"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/lib/validators"
+    },
+    {
+      "source": "src/components/admin/AdminExpenses.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/textarea"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/AdminOfficialTemplates.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/components/ui/tabs"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/hooks/useSiteSettings"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/components/admin/settings/GeneralTab"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/components/admin/settings/BrandingTab"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/components/admin/settings/NotificationsTab"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/components/admin/settings/IntegrationsTab"
+    },
+    {
+      "source": "src/components/admin/AdminSettings.tsx",
+      "target": "@/components/admin/settings/LogsTab"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/textarea"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/checkbox"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/select"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/components/ui/alert-dialog"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/AdminTasks.tsx",
+      "target": "@/lib/utils"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/components/ui/table"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/components/ui/dialog"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/AdminMarketingMaterials.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/affiliate/MarketingTools.tsx",
+      "target": "@/hooks/useSiteSettings"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/components/ui/switch"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "framer-motion"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/components/ui/tooltip"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/lib/bivvo-calc"
+    },
+    {
+      "source": "src/components/affiliate/BivvoCalculator.tsx",
+      "target": "@/hooks/useSiteSettings"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "@/components/ui/select"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/settings/GeneralTab.tsx",
+      "target": "@/hooks/useSaveSetting"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/hooks/useSaveSetting"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/settings/IntegrationsTab.tsx",
+      "target": "@/hooks/useAdmin"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/components/ui/select"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/hooks/useSaveSetting"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/admin/settings/BrandingTab.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/integrations/supabase/client"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/hooks/use-toast"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/components/ui/select"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "@/components/ui/badge"
+    },
+    {
+      "source": "src/components/admin/settings/LogsTab.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "react"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "@/components/ui/card"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "@/components/ui/input"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "@/components/ui/label"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "@/components/ui/button"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "@/components/ui/switch"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "lucide-react"
+    },
+    {
+      "source": "src/components/admin/settings/NotificationsTab.tsx",
+      "target": "@/hooks/useSaveSetting"
+    }
+  ]
+}

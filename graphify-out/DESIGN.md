@@ -1,0 +1,196 @@
+# Design system
+
+Generated: 2026-10-16T21:43:10.769472+00:00
+
+## Tokens
+- --background: 210 50% 98% (src/index.css)
+- --foreground: 210 50% 11% (src/index.css)
+- --card: 0 0% 100% (src/index.css)
+- --card-foreground: 210 50% 11% (src/index.css)
+- --popover: 0 0% 100% (src/index.css)
+- --popover-foreground: 210 50% 11% (src/index.css)
+- --primary: 207 100% 11% (src/index.css)
+- --primary-foreground: 0 0% 100% (src/index.css)
+- --secondary: 210 40% 96% (src/index.css)
+- --secondary-foreground: 207 100% 11% (src/index.css)
+- --muted: 210 40% 96% (src/index.css)
+- --muted-foreground: 210 25% 45% (src/index.css)
+- --accent: 210 79% 46% (src/index.css)
+- --accent-foreground: 0 0% 100% (src/index.css)
+- --destructive: 0 84% 60% (src/index.css)
+- --destructive-foreground: 0 0% 100% (src/index.css)
+- --border: 210 30% 90% (src/index.css)
+- --input: 210 30% 90% (src/index.css)
+- --ring: 210 79% 46% (src/index.css)
+- --radius: 0.75rem (src/index.css)
+- --success: 142 76% 36% (src/index.css)
+- --success-foreground: 0 0% 100% (src/index.css)
+- --sidebar-background: 0 0% 98% (src/index.css)
+- --sidebar-foreground: 240 5.3% 26.1% (src/index.css)
+- --sidebar-primary: 240 5.9% 10% (src/index.css)
+- --sidebar-primary-foreground: 0 0% 98% (src/index.css)
+- --sidebar-accent: 240 4.8% 95.9% (src/index.css)
+- --sidebar-accent-foreground: 240 5.9% 10% (src/index.css)
+- --sidebar-border: 220 13% 91% (src/index.css)
+- --sidebar-ring: 210 79% 46% (src/index.css)
+- --glass-bg: 210 50% 98% / 0.7 (src/index.css)
+- --glass-border: 210 30% 90% / 0.5 (src/index.css)
+- --gradient-primary: 207 100% 11% (src/index.css)
+- --gradient-accent: 210 79% 46% (src/index.css)
+- --glow-accent: 210 79% 46% / 0.3 (src/index.css)
+- --background: 220 25% 6% (src/index.css)
+- --foreground: 210 40% 98% (src/index.css)
+- --card: 220 20% 10% (src/index.css)
+- --card-foreground: 210 40% 98% (src/index.css)
+- --popover: 220 20% 10% (src/index.css)
+- --popover-foreground: 210 40% 98% (src/index.css)
+- --primary: 210 79% 50% (src/index.css)
+- --primary-foreground: 0 0% 100% (src/index.css)
+- --secondary: 220 20% 14% (src/index.css)
+- --secondary-foreground: 210 40% 98% (src/index.css)
+- --muted: 220 20% 14% (src/index.css)
+- --muted-foreground: 210 25% 60% (src/index.css)
+- --accent: 210 79% 50% (src/index.css)
+- --accent-foreground: 0 0% 100% (src/index.css)
+- --destructive: 0 62% 45% (src/index.css)
+- --destructive-foreground: 210 40% 98% (src/index.css)
+- --border: 220 20% 18% (src/index.css)
+- --input: 220 20% 18% (src/index.css)
+- --ring: 210 79% 50% (src/index.css)
+- --success: 142 76% 40% (src/index.css)
+- --success-foreground: 0 0% 100% (src/index.css)
+- --sidebar-background: 220 25% 6% (src/index.css)
+- --sidebar-foreground: 240 4.8% 95.9% (src/index.css)
+- --sidebar-primary: 210 79% 50% (src/index.css)
+- --sidebar-primary-foreground: 0 0% 100% (src/index.css)
+- --sidebar-accent: 220 20% 14% (src/index.css)
+- --sidebar-accent-foreground: 240 4.8% 95.9% (src/index.css)
+- --sidebar-border: 220 20% 14% (src/index.css)
+- --sidebar-ring: 210 79% 50% (src/index.css)
+- --glass-bg: 220 20% 10% / 0.6 (src/index.css)
+- --glass-border: 220 20% 25% / 0.3 (src/index.css)
+- --gradient-primary: 220 25% 8% (src/index.css)
+- --gradient-accent: 210 79% 50% (src/index.css)
+- --glow-accent: 210 79% 50% / 0.25 (src/index.css)
+
+## UI components
+- accordion
+- alert
+- alert-dialog
+- aspect-ratio
+- avatar
+- badge
+- breadcrumb
+- button
+- calendar
+- card
+- carousel
+- chart
+- checkbox
+- collapsible
+- command
+- context-menu
+- dialog
+- drawer
+- dropdown-menu
+- form
+- hover-card
+- input
+- input-otp
+- label
+- menubar
+- navigation-menu
+- pagination
+- popover
+- progress
+- radio-group
+- resizable
+- scroll-area
+- select
+- separator
+- sheet
+- sidebar
+- skeleton
+- slider
+- sonner
+- switch
+- table
+- tabs
+- textarea
+- toast
+- toaster
+- toggle
+- toggle-group
+- tooltip
+
+## Project components
+- src/components/NavLink.tsx
+- src/components/ProtectedRoute.tsx
+- src/components/admin/AdminAffiliates.tsx
+- src/components/admin/AdminExpenses.tsx
+- src/components/admin/AdminFinanceDashboard.tsx
+- src/components/admin/AdminMarketingMaterials.tsx
+- src/components/admin/AdminOfficialTemplates.tsx
+- src/components/admin/AdminSettings.tsx
+- src/components/admin/AdminTasks.tsx
+- src/components/admin/settings/BrandingTab.tsx
+- src/components/admin/settings/GeneralTab.tsx
+- src/components/admin/settings/IntegrationsTab.tsx
+- src/components/admin/settings/LogsTab.tsx
+- src/components/admin/settings/NotificationsTab.tsx
+- src/components/affiliate/BivvoCalculator.tsx
+- src/components/affiliate/MarketingTools.tsx
+- src/components/checkout/BoletoPayment.tsx
+- src/components/checkout/CardBrands.tsx
+- src/components/checkout/PaymentMethodSelector.tsx
+- src/components/checkout/PixPayment.tsx
+- src/components/checkout/SecurityFooter.tsx
+- src/components/checkout/TrustBadges.tsx
+- src/components/ui/accordion.tsx
+- src/components/ui/alert-dialog.tsx
+- src/components/ui/alert.tsx
+- src/components/ui/aspect-ratio.tsx
+- src/components/ui/avatar.tsx
+- src/components/ui/badge.tsx
+- src/components/ui/breadcrumb.tsx
+- src/components/ui/button.tsx
+- src/components/ui/calendar.tsx
+- src/components/ui/card.tsx
+- src/components/ui/carousel.tsx
+- src/components/ui/chart.tsx
+- src/components/ui/checkbox.tsx
+- src/components/ui/collapsible.tsx
+- src/components/ui/command.tsx
+- src/components/ui/context-menu.tsx
+- src/components/ui/dialog.tsx
+- src/components/ui/drawer.tsx
+- src/components/ui/dropdown-menu.tsx
+- src/components/ui/form.tsx
+- src/components/ui/hover-card.tsx
+- src/components/ui/input-otp.tsx
+- src/components/ui/input.tsx
+- src/components/ui/label.tsx
+- src/components/ui/menubar.tsx
+- src/components/ui/navigation-menu.tsx
+- src/components/ui/pagination.tsx
+- src/components/ui/popover.tsx
+- src/components/ui/progress.tsx
+- src/components/ui/radio-group.tsx
+- src/components/ui/resizable.tsx
+- src/components/ui/scroll-area.tsx
+- src/components/ui/select.tsx
+- src/components/ui/separator.tsx
+- src/components/ui/sheet.tsx
+- src/components/ui/sidebar.tsx
+- src/components/ui/skeleton.tsx
+- src/components/ui/slider.tsx
+- src/components/ui/sonner.tsx
+- src/components/ui/switch.tsx
+- src/components/ui/table.tsx
+- src/components/ui/tabs.tsx
+- src/components/ui/textarea.tsx
+- src/components/ui/toast.tsx
+- src/components/ui/toaster.tsx
+- src/components/ui/toggle-group.tsx
+- src/components/ui/toggle.tsx
+- src/components/ui/tooltip.tsx
